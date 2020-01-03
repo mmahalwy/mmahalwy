@@ -1,0 +1,38 @@
+import BlogMeta from '../../components/BlogMeta';
+export const meta = {
+  title: 'This is my first post',
+  tags: ['serverless', 'node.js', 'python'],
+  layout: 'post',
+  publishDate: '2017-10-02',
+  modifiedDate: false,
+  seoDescription: 'This post demonstrates syntax-hightlighted code in your post.',
+  exclude: false,
+};
+
+<BlogMeta data={props} />
+
+No need for a title in body. You add the title to the metadata, and it appears here.
+Same for tags and publication date.
+This starter blog is set up for code highlighting like so:
+
+```jsx
+import React, { Component } from 'react';
+import FormContainer from './containers/FormContainer';
+
+class App extends Component {
+  render() {
+    return (
+      <div className="container">
+        <div className="columns">
+          <div className="col-md-9 centered">
+            <h3>React.js Controlled Form Components</h3>
+            <FormContainer />
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default App;
+```
