@@ -1,6 +1,6 @@
 import get from 'lodash/get';
 import SearchLayout from '../components/layouts/SearchLayout';
-import BlogLayout from '../components/layouts/BlogLayout';
+import MainLayout from '../components/layouts/MainLayout';
 import { LAYOUT_TYPES } from '../utils/constants';
 
 export function renderLayout(props) {
@@ -9,9 +9,9 @@ export function renderLayout(props) {
   switch (get(postData, 'layout')) {
     case LAYOUT_TYPES['POST']:
       return (
-        <BlogLayout>
+        <MainLayout>
           <Component {...props} postData={postData} />
-        </BlogLayout>
+        </MainLayout>
       );
     case LAYOUT_TYPES['SEARCH']:
       return (
@@ -22,18 +22,18 @@ export function renderLayout(props) {
       );
     case LAYOUT_TYPES['BLOG-POST-LIST']:
       return (
-        <BlogLayout>
+        <MainLayout>
           <Component {...props} />
           {/* Put styled-jsx here */}
-        </BlogLayout>
+        </MainLayout>
       );
     case LAYOUT_TYPES['PAGE']:
     default:
       return (
-        <BlogLayout>
+        <MainLayout>
           <Component {...props} />
           {/* Put styled-jsx here */}
-        </BlogLayout>
+        </MainLayout>
       );
   }
 }

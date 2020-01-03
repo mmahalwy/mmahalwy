@@ -6,11 +6,11 @@ const markdownImport = (type = "post") =>
         type === "post" ? "../../" : "../"
     } components/BlogMeta";`;
 /* prettier-ignore */
-const mardownContent = () => 
+const mardownContent = () =>
 `export const meta = {
     title: "MDX Page",
     // the first tag below will be used in <meta property="article:tag" content="first-tag" />
-    tags: ["tag-1", "tag-2"], 
+    tags: [],
     layout: "blog-layout",
     publishDate: "2011-01-01",
     modifiedDate: false, // "If used it must be in 'YYYY-MM-DD format' like publishDate"
@@ -25,11 +25,11 @@ No need to add a title, as it is in the \`meta\` data above and will auto-magica
 
 The \`exclude\` can be excluded (ha!) unless you want this post to be excluded from the post list on the \`/blog\` page.`;
 /* prettier-ignore */
-const reactContent = () => 
+const reactContent = () =>
 `export const meta = {
     title: "JavaScript Page",
     // The tags are used for SEO in the header property: \`<meta name="keywords" content={stringOfAllPostTags} />\`
-    tags: ["tag-1", "tag-2"], 
+    tags: [],
     layout: "page",
     publishDate: "2011-01-01",
     modifiedDate: false, // "If used it must be in 'YYYY-MM-DD format' like publishDate"
@@ -38,7 +38,7 @@ const reactContent = () =>
     hideProgressBar: false,
 }
 
-export default class Index extends Component {
+class Index extends Component {
     render() {
         return (
             <div>
@@ -48,10 +48,13 @@ export default class Index extends Component {
             </div>
         );
     }
-}`;
+}
 
-module.exports = (markdown = false, type = "post") => `${
-    markdown ? markdownImport(type) : `${reactImport}\n`
+export default Index
+`;
+
+module.exports = (markdown = false, type = 'post') => `${
+  markdown ? markdownImport(type) : `${reactImport}\n`
 }
 ${markdown ? `\n${mardownContent()}` : `${reactContent()}`}
 `;

@@ -1,11 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
+import { config } from '../config';
 
-function tagMaker(tagList) {
-  let alphabetizedTags = tagList.sort();
+const TagBlock = ({ tags }) => {
+  if (!tags || !Array.isArray(tags)) return null;
+
+  let alphabetizedTags = tags.sort();
+
   return (
     <small className={`tag-container`}>
-      <span>Tags: </span>
       {alphabetizedTags.map((tag) => (
         <Link key={`${tag}-link`} href={`/search?q=${tag}`}>
           <a key={tag} className="tag">
@@ -16,18 +19,17 @@ function tagMaker(tagList) {
       <style jsx>{`
         .tag-container {
           margin-top: 10px;
-          font-size: smaller;
         }
         a.tag {
           margin-left: 10px;
-          background-color: #eee;
-
-          font-size: 14px;
+          background-color: ${config.css.primaryColor};
+          color: #fff;
+          font-size: 12px;
           padding: 3px 9px;
-          border: 2px solid #ddd;
-          border-radius: 17px;
+          border-radius: 4px;
           cursor: pointer;
           text-decoration: none;
+          border: none;
         }
 
         a.tag:first-of-type {
@@ -36,11 +38,6 @@ function tagMaker(tagList) {
       `}</style>
     </small>
   );
-}
-
-const TagBlock = (props) => {
-  if (!props.tags || !Array.isArray(props.tags)) return null;
-  return tagMaker(props.tags);
 };
 
 export default TagBlock;

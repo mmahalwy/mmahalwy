@@ -24,7 +24,7 @@ export const globalStyles = css.global`
     scroll-behavior: smooth;
   }
   body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', -apple-system, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
     position: relative;
     top: 0;
     margin: 0;
@@ -62,20 +62,17 @@ export const globalStyles = css.global`
   h5 > *,
   h6,
   h6 > * {
-    font-family: 'Open Sans';
     letter-spacing: 1px;
   }
-  strong {
-    color: ${config.css.accentColor};
-  }
+
   .search-layout,
-  .blog-layout,
-  .blog-post-list {
+  .main-layout {
     max-width: 740px;
     padding: 40px 20px 100px 20px;
     position: relative;
+    margin: 0px auto;
   }
-  .blog-layout {
+  .main-layout {
     display: flex;
     flex-direction: column;
   }

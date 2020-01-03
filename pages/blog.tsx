@@ -15,9 +15,8 @@ function Blog({ allData = [] }) {
   const blogPosts = allData.filter((content) => content.type == 'post');
   return (
     <div className="blog-post-list">
-      <h1>{meta.title}</h1>
       {blogPosts.map((post, index) => (
-        <PostListing key={index} post={post} indes={index} />
+        <PostListing key={index} post={post} index={index} />
       ))}
     </div>
   );

@@ -22,16 +22,14 @@ export default class MyDocument extends Document {
           <link rel="manifest" href="/static/manifest.json" />
           <meta name="theme-color" content={config.css.primaryColor} />
 
-          <link rel="icon" type="image/png" sizes="32x32" href="/static/icons/icon_32.png" />
-          <link rel="icon" type="image/png" sizes="48x48" href="/static/icons/icon_48.png" />
-          <link rel="icon" type="image/png" sizes="128x128" href="/static/icons/icon_128.png" />
-          <link rel="icon" type="image/png" sizes="256x256" href="/static/icons/icon_256.png" />
+          <link rel="icon" type="image/png" sizes="16x16" href="/static/icons/favicon-16x16.png" />
+          <link rel="icon" type="image/png" sizes="32x32" href="/static/icons/favicon-32x32.png" />
 
           <meta name="apple-mobile-web-app-title" content={config.siteName} />
-          <link rel="apple-touch-icon" sizes="152x152" href="/static/icons/icon_180.png" />
+          <link rel="apple-touch-icon" sizes="152x152" href="/static/icons/apple-touch-icon.png" />
 
           <meta name="msapplication-TileColor" content={config.css.primaryColor} />
-          <meta name="msapplication-TileImage" content="/static/icons/icon_150.png" />
+          <meta name="msapplication-TileImage" content="/static/icons/favicon-32x32.png" />
           <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-tomorrow.min.css"

@@ -1,10 +1,8 @@
 import React from 'react';
 import { config } from '../config';
 
-export default function Footer() {
-  return (
-    <div className="footer">
-      &copy; 2018 - {new Date().getFullYear()} {config.author}
-    </div>
-  );
+function Footer() {
+  return <div className="footer">{config.author}</div>;
 }
+
+export default Footer;

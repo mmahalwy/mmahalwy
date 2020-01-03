@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { config } from '../config';
+import MainLayout from './layouts/MainLayout';
 
 export const NavigationItem = (props) => (
   <li>
@@ -23,13 +24,18 @@ export const NavigationItem = (props) => (
 );
 
 const Navigation = () => (
-  <>
+  <MainLayout>
     <ul>
       {config.navigation.map((navData) => {
         return <NavigationItem key={navData.link} data={navData} />;
       })}
     </ul>
-  </>
+    <style jsx>{`
+      ul {
+        padding: 0;
+      }
+    `}</style>
+  </MainLayout>
 );
 
 export default Navigation;

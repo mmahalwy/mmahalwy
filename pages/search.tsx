@@ -28,9 +28,7 @@ function Search({ allData = [], router }) {
   const blogPosts = allData.filter((content) => content.type == 'post');
   return (
     <SearchLayout>
-      <h1>
-        Posts tagged: <span>{router.query.q}</span>
-      </h1>
+      <h1>Posts tagged: {router.query.q}</h1>
       {renderListItems(blogPosts)}
     </SearchLayout>
   );
