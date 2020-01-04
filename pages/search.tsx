@@ -1,6 +1,7 @@
 import React from 'react';
-import SearchLayout from '../components/layouts/SearchLayout';
+import MainLayout from '../components/layouts/MainLayout';
 import PostListing from '../components/PostListing';
+import { Title1 } from '../components/dls/Title';
 
 export const meta = {
   title: 'Search',
@@ -27,10 +28,10 @@ function Search({ allData = [], router }) {
   };
   const blogPosts = allData.filter((content) => content.type == 'post');
   return (
-    <SearchLayout>
-      <h1>Posts tagged: {router.query.q}</h1>
+    <MainLayout>
+      <Title1>Posts tagged: {router.query.q}</Title1>
       {renderListItems(blogPosts)}
-    </SearchLayout>
+    </MainLayout>
   );
 }
 

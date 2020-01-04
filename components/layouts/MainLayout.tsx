@@ -1,9 +1,17 @@
 import React, { ReactNode } from 'react';
+import styled from 'styled-components';
 
 type MainLayoutProps = {
   children: NonNullable<ReactNode>;
 };
 
-const MainLayout = ({ children }: MainLayoutProps) => <div className="main-layout">{children}</div>;
+const Container = styled.div`
+  max-width: 740px;
+  padding: 20px 20px 100px 20px;
+  position: relative;
+  margin: 0px auto;
+`;
+
+const MainLayout = ({ children }: MainLayoutProps) => <Container>{children}</Container>;
 
 export default MainLayout;

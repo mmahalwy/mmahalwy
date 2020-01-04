@@ -47,6 +47,8 @@
         "remark-emoji": "^2.0.2",
         "remark-images": "^1.0.0",
         "scrollprogress": "^3.0.2",
+        "styled-components": "^4.4.1",
+        "styled-reboot": "^4.0.3",
         "yargs": "^15.0.2"
     },
     "devDependencies": {

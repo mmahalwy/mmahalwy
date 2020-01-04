@@ -1,15 +1,25 @@
-import App, { Container } from 'next/app';
-import Head from 'next/head';
+import App from 'next/app';
+import styled, { ThemeProvider } from 'styled-components';
 import { NextSeo } from 'next-seo';
 import ReactGA from 'react-ga';
+import { MDXProvider } from '@mdx-js/react';
 import Navigation from '../components/Navigation';
 import { createSEOConfig } from '../utils/seo';
 import getPostData from '../utils/get-post-data';
 import BlogEngine from '../utils/blog-engine';
 import { renderLayout } from '../utils/render-app-layout';
 import Footer from '../components/Footer';
+import GlobalStyles from '../components/GlobalStyles';
+import MdxComponents from '../components/MdxComponents';
 import { checkForSW } from '../utils/check-for-sw';
+import { config } from '../config';
 
+const Main = styled.main`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 100vh;
+`;
 export default class MyApp extends App {
   static async getInitialProps({ Component, router, ctx, ...other }) {
     let pageProps = {};
@@ -49,17 +59,22 @@ export default class MyApp extends App {
     const { pageData } = this.props;
 
     return (
-      <React.Fragment>
+      <ThemeProvider theme={config.css}>
+        <GlobalStyles />
         {pageData && <NextSeo {...createSEOConfig(pageData)} />}
         {/* (2) navigation */}
-        <Navigation />
+        <Main>
+          <Navigation />
 
-        {/* (3) page body */}
-        <React.Fragment>{renderLayout(this.props, this.state)}</React.Fragment>
+          {/* (3) page body */}
+          <React.Fragment>
+            <MDXProvider components={MdxComponents}>{renderLayout(this.props)}</MDXProvider>
+          </React.Fragment>
 
-        {/* (4) footer */}
-        <Footer />
-      </React.Fragment>
+          {/* (4) footer */}
+          <Footer />
+        </Main>
+      </ThemeProvider>
     );
   }
 }

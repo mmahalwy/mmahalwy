@@ -1,3 +1,6 @@
+import Text from '../components/dls/Text';
+import Anchor from '../components/dls/Anchor';
+
 export const meta = {
   title: 'Next.js MDX Blog Kit',
   tags: ['Next.js', 'MDX'],
@@ -10,56 +13,62 @@ export const meta = {
 const Index = ({ allData }) => {
   return (
     <div>
-      <p>👋👋</p>
-      <p>
+      <Text>👋👋</Text>
+      <Text>
         I am a software engineer at{' '}
-        <a href="https://airbnb.com" target="_blank">
+        <Anchor href="https://airbnb.com" target="_blank">
           Airbnb
-        </a>
+        </Anchor>
         , working on Omni - an internal CMS that allows anyone to create{' '}
-        <a href="https://airbnb.com/adventures" target="_blank">
+        <Anchor href="https://airbnb.com/adventures" target="_blank">
           landing pages
-        </a>
+        </Anchor>
         ,{' '}
-        <a
+        <Anchor
           href="https://reallygoodemails.com/emails/now-serving-your-most-memorable-meal-yet/"
           target="_blank"
         >
           emails
-        </a>{' '}
+        </Anchor>{' '}
         and{' '}
-        <a
+        <Anchor
           href="https://www.airbnb.com/s/experiences?refinement_paths%5B%5D=%2Fexperiences%2FKG%2FTag%3A1712"
           target="_blank"
         >
           search promotions
-        </a>{' '}
+        </Anchor>{' '}
         without the need to code deployment!
-      </p>
-      <p>
-        <strong>On my free time,</strong> I enjoy playing soccer, eating out, hanging out with
-        friends and working on side projects.
-      </p>
-      <p>
+      </Text>
+      <Text>
+        <strong>On my free time,</strong> I enjoy playing{' '}
+        <Anchor
+          href="https://www.sfsfl.com/LibLeague/Team/Team.php?PARAM_SEASON_CODE=2019+PARAM_TEAM_CODE=BELO"
+          target="_blank"
+        >
+          soccer
+        </Anchor>
+        , eating out, hanging out with friends and working on side projects.
+      </Text>
+      <Text>
         <strong>
-          <a href="mailto:mmahalwy@gmail.com">Talk to me</a>
+          <Anchor href="mailto:mmahalwy@gmail.com">Talk to me</Anchor>
         </strong>{' '}
         about 📈investing, 🏠real estate, 🖥tech and 🇨🇦Canada!
-      </p>
-      <p>
+      </Text>
+      <Text>
         <strong>I hang out</strong> on{' '}
-        <a href="https://twitter.com/mmahalwy" target="_blank">
+        <Anchor href="https://twitter.com/mmahalwy" target="_blank">
           Twitter
-        </a>
+        </Anchor>
         ,{' '}
-        <a href="https://instagram.com/mmahalwy" target="_blank">
+        <Anchor href="https://instagram.com/mmahalwy" target="_blank">
           Instagram
-        </a>{' '}
+        </Anchor>{' '}
         and{' '}
-        <a href="https://github.com/mmahalwy" target="_blank">
+        <Anchor href="https://github.com/mmahalwy" target="_blank">
           Github
-        </a>
-      </p>
+        </Anchor>
+      </Text>
     </div>
   );
 };

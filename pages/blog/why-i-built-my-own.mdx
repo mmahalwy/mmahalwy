@@ -1,0 +1,75 @@
+import BlogMeta from '../../components/BlogMeta';
+import Figure from '../../components/Figure';
+import { TAGS } from '../../utils/constants';
+import notionApi from '../../public/static/images/notion-api.jpeg';
+
+export const meta = {
+  title: 'Why I built my own blog',
+  tags: [TAGS.BLOGGING],
+  layout: 'post',
+  publishDate: '2020-01-03',
+  modifiedDate: false,
+  seoDescription: 'A little about the process',
+  exclude: false,
+};
+
+<BlogMeta data={props} />
+
+For some time now, I been longing to start writing and blogging again.
+I previously wrote on Medium quite a bit and was an avid consumer of content on
+Medium in the early days. But things changed when click-bait became a common
+curse amongst many Medium posts. Slowly and slowly I found myself consuming
+less on Medium and more on Twitter. Adding the recent uprise of paywalls, I decided to look for
+an alternative solution.
+
+### Can I use Notion?
+
+I love [Notion](https://notion.so). With more and more of my life moving onto Notion, I figured
+Notion would be a nature fit. The challenge there is while I can create multiple pages to be public,
+it lacked features that were important to me if I wanted to take this seriously. It lacked Google Analytics
+tracking and other social features such as a signup form.
+
+**What about using their API?**
+
+They don't currently have a public API but I figured I can reverse engineer their existing on to use. Well...
+it's not that easy after all 🙃
+
+<Figure src={notionApi} alt="notion api" caption="Notion's API" />
+
+As you can see, the API is pretty cryptic and hard to understand. So, I decided to give up on that. Maybe
+at a later date when they release their offial API, I will move my blog to be powered by them.
+
+**What about a headless CMS?**
+
+These are becoming popular these days. Some include:
+
+- [ButterCMS](https://buttercms.com/)
+- [Contentful](https://contentful.com)
+- [Contentstack](https://contentstack.com)
+  and many more.
+
+I decided against them because:
+
+1. They were expensive
+2. They didn't have very good support for code snippets
+3. Limited customization
+
+**Let's just build our own, right?**
+Lately, I been looking into using Nextjs. I picked it up over a year ago but didn't do much with it.
+The promise of writing React with all the benefits of server side rendering, SEO friendliness, speed,
+and 1 command deploy is very appealing.
+
+The challenge is getting my .MD files to a page, then getting a way to get a list of all my posts in
+an organized way.
+
+This was a challenge.
+
+I was inspired by Dan Abramov's [overreacted.io](https://overreacted.io) that is built
+using Gatsbyjs. After many hours and digging and hacking, I stumbled upon this [github repo](https://github.com/lorenseanstewart/nextjs-mdx-blog-kit).
+I forked it to make some changes of my own to make this work for me. This post is written in MDX (MD + JSX).
+
+It allows me to write in MD with the added benefit of having JSX/TSX when needed. In addition, I can create
+very specific customizations that are unique to me and my site. More on that later.
+
+You can find the code for this blog [here](https://github.com/mmahalwy/mmahalwy). Feel free to copy it, fork it
+or do whatever you like with it.

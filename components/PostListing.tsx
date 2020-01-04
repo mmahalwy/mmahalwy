@@ -2,6 +2,9 @@ import React from 'react';
 import Link from 'next/link';
 import TagBlock from './Tags';
 import { PostDataType } from '../types/PostDataType';
+import Title from './dls/Title';
+import Text from './dls/Text';
+import Anchor from './dls/Anchor';
 
 type PostListingType = {
   post: PostDataType;
@@ -11,12 +14,12 @@ type PostListingType = {
 function PostListing({ post, index }: PostListingType) {
   return (
     <React.Fragment key={post.title}>
-      <h2>
+      <Title>
         <Link href={`/blog/${post.name}`}>
-          <a>{post.title}</a>
+          <Anchor>{post.title}</Anchor>
         </Link>
-      </h2>
-      <p>{post.seoDescription}</p>
+      </Title>
+      <Text>{post.seoDescription}</Text>
       <TagBlock tags={post.tags} />
     </React.Fragment>
   );
