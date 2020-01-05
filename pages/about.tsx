@@ -1,5 +1,4 @@
 import React from 'react';
-import { centeredPageStyles } from '../styles';
 
 export const meta = {
   title: 'About',
@@ -14,7 +13,6 @@ function About() {
   return (
     <div>
       <h1>About</h1>
-      <style jsx>{centeredPageStyles}</style>
     </div>
   );
 }
