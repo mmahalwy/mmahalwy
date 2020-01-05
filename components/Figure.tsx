@@ -10,10 +10,13 @@ const Caption = styled.figcaption`
   font-size: 12px;
   margin-top: 8px;
 `;
+const Image = styled.img`
+  width: 100%;
+`;
 
 const Figure = ({ src, alt, caption }) => (
   <Container>
-    <img src={src} alt={alt} />
+    <Image src={src} alt={alt} />
     <Caption>{caption}</Caption>
   </Container>
 );

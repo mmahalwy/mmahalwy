@@ -10,6 +10,7 @@ const Container = styled.div`
   padding: 20px 20px 100px 20px;
   position: relative;
   margin: 0px auto;
+  width: 100%;
 `;
 
 const MainLayout = ({ children }: MainLayoutProps) => <Container>{children}</Container>;
