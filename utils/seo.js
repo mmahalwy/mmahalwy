@@ -23,7 +23,9 @@ export function articleSEO(postData) {
 
 export function createSEOConfig(data) {
   if (!data) return;
+
   const description = data.seoDescription ? data.seoDescription : config.siteDescription;
+
   return {
     title: data.title,
     description: description,

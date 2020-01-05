@@ -2,12 +2,12 @@ import Text from '../components/dls/Text';
 import Anchor from '../components/dls/Anchor';
 
 export const meta = {
-  title: 'Next.js MDX Blog Kit',
-  tags: ['Next.js', 'MDX'],
+  title: "Mo's website",
+  tags: [],
   layout: 'post',
-  publishDate: '2011-01-01',
+  publishDate: '',
   modifiedDate: false,
-  seoDescription: 'This is the home page.',
+  seoDescription: 'Welcome to my site!',
 };
 
 const Index = ({ allData }) => {

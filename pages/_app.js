@@ -1,6 +1,6 @@
 import App from 'next/app';
 import styled, { ThemeProvider } from 'styled-components';
-import { NextSeo } from 'next-seo';
+import { NextSeo, DefaultSeo } from 'next-seo';
 import ReactGA from 'react-ga';
 import { MDXProvider } from '@mdx-js/react';
 import Navigation from '../components/Navigation';
@@ -61,6 +61,15 @@ export default class MyApp extends App {
     return (
       <ThemeProvider theme={config.css}>
         <GlobalStyles />
+        <DefaultSeo
+          title="Mo's website"
+          description="Welcome to my site!"
+          twitter={{
+            handle: '@mmahalwy',
+            site: '@mmahalwy',
+            cardType: 'summary_large_image',
+          }}
+        />
         {pageData && <NextSeo {...createSEOConfig(pageData)} />}
         {/* (2) navigation */}
         <Main>
