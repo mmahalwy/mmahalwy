@@ -3,6 +3,7 @@ import { config } from '../config';
 
 const postFileNames = () => {
   const postFileNames = preval`module.exports = require("fs").readdirSync("./pages/blog")` || [];
+
   return Promise.resolve(postFileNames);
 };
 

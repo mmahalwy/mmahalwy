@@ -7,4 +7,6 @@ export const LAYOUT_TYPES = {
 
 export const TAGS = {
   BLOGGING: 'blogging',
+  INVESTING: 'investing',
+  TECH: 'tech',
 };
