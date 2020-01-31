@@ -1,6 +1,7 @@
 import { Title3, Title1, Title2 } from './dls/Title';
 import Text from './dls/Text';
 import Anchor from './dls/Anchor';
+import List from './dls/List';
 
 const components = {
   h1: Title1,
@@ -8,6 +9,7 @@ const components = {
   h3: Title3,
   p: Text,
   a: Anchor,
+  ul: List,
 };
 
 export default components;

@@ -22,6 +22,12 @@ const Tag = styled.a`
   &:first-of-type {
     margin-left: 0px;
   }
+
+  &:hover {
+    text-decoration: none;
+    color: ${(props) => props.theme.white};
+    opacity: ${(props) => props.theme.opacity};
+  }
 `;
 
 const TagBlock = ({ tags }) => {

@@ -1,5 +1,6 @@
 // @ts-ignore
 import image from '../public/static/images/my-pic.jpg';
+import { darken } from 'polished';
 
 export const config = {
   author: 'Mohamed El Mahallawy',
@@ -25,7 +26,10 @@ export const config = {
     primaryColor: '#536DFE',
     accentColor: '#455A64',
     lightGray: '#eeeeee',
-    backgroundColor: '#ffffff',
-    black: '#333',
+    backgroundColor: '#111',
+    black: '#111',
+    white: '#fff',
+    textColor: darken(0.3, '#fff'),
+    opacity: 0.7,
   },
 };

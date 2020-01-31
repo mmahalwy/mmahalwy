@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { config } from '../config';
 
 const Container = styled.footer`
-  background: #fff;
+  background: ${(props) => props.theme.black};
   height: 80px;
   width: 100%;
   border-top: 2px solid ${(props) => props.theme.lightGray};

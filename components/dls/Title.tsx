@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 
 const commonStyles = css`
   letter-spacing: 1px;
+  color: ${(props) => props.theme.white};
 `;
 
 export const Title1 = styled.h1`

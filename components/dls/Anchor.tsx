@@ -1,11 +1,12 @@
 import styled from 'styled-components';
+import { rgba } from 'polished';
 
 const Anchor = styled.a`
-  color: ${(props) => props.theme.black};
+  color: ${(props) => props.theme.white};
   cursor: pointer;
 
   &:hover {
-    color: rgba(51, 51, 51, 0.7);
+    color: ${(props) => rgba(props.theme.white, props.theme.opacity)};
   }
 `;
 

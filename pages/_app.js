@@ -81,7 +81,7 @@ export default class MyApp extends App {
           </React.Fragment>
 
           {/* (4) footer */}
-          <Footer />
+          {/* <Footer /> */}
         </Main>
       </ThemeProvider>
     );

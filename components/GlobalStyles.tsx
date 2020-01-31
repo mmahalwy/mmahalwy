@@ -12,18 +12,18 @@ const options = {
   fontSizeBase: '1rem',
   fontWeightBase: 400,
   lineHeightBase: 1.5,
-  bodyColor: config.css.black,
-  bodyBg: '#fff',
   headingsMarginBottom: '0.5rem',
   paragraphMarginBottom: '1rem',
   labelMarginBottom: '0.5rem',
   dtFontWeight: 700,
-  linkColor: config.css.black,
+  linkColor: config.css.white,
   linkDecoration: 'underline',
   linkHoverColor: config.css.black,
   linkHoverDecoration: 'underline',
   tableCellPadding: '0.75rem',
   textMuted: '#6c757d',
+  bodyColor: config.css.white,
+  bodyBg: config.css.backgroundColor,
 };
 
 const rebootCss = reboot(options);

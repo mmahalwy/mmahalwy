@@ -2,11 +2,12 @@ import React from 'react';
 import Link from 'next/link';
 import { config } from '../config';
 import MainLayout from './layouts/MainLayout';
+import Anchor from './dls/Anchor';
 
 export const NavigationItem = (props) => (
   <li>
     <Link href={props.data.link}>
-      <a>{props.data.text}</a>
+      <Anchor href={props.data.link}>{props.data.text}</Anchor>
     </Link>
     <style jsx>{`
       li {

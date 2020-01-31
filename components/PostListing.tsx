@@ -21,7 +21,7 @@ function PostListing({ post, index }: PostListingType) {
     <Container key={post.title}>
       <Title>
         <Link href={`/blog/${post.name}`}>
-          <Anchor>{post.title}</Anchor>
+          <Anchor href={`/blog/${post.name}`}>{post.title}</Anchor>
         </Link>
       </Title>
       <Text>{post.seoDescription}</Text>
