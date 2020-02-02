@@ -3,7 +3,7 @@ import { config } from '../config';
 
 // _app.js and _document.js are next.js specific files, and should be ignored
 // the blog directory is ignored here, but is processed in post-list.js
-const ignoreList = ['_app.js', '_document.js', 'blog/index'];
+const ignoreList = ['_app.js', '_document.js', 'blog/index.tsx'];
 
 const pageFileNames = () => {
   const allPageFileNames = preval`module.exports = require("fs").readdirSync("./pages")` || [];
