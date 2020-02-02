@@ -12,6 +12,7 @@ export const meta = {
 
 function Blog({ allData = [] }) {
   const blogPosts = allData.filter((content) => content.type == 'post');
+
   return (
     <>
       {blogPosts.map((post, index) => (

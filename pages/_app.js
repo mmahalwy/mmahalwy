@@ -8,7 +8,6 @@ import { createSEOConfig } from '../utils/seo';
 import getPostData from '../utils/get-post-data';
 import BlogEngine from '../utils/blog-engine';
 import { renderLayout } from '../utils/render-app-layout';
-import Footer from '../components/Footer';
 import GlobalStyles from '../components/GlobalStyles';
 import MdxComponents from '../components/MdxComponents';
 import { checkForSW } from '../utils/check-for-sw';

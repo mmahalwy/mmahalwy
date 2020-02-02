@@ -21,19 +21,26 @@ export function articleSEO(postData) {
   );
 }
 
-export function createSEOConfig(data) {
+type DataType = {
+  title?: string;
+  seoDescription?: string;
+  canonicalUrl?: string;
+};
+
+export function createSEOConfig(data?: DataType) {
   if (!data) return;
 
+  const title = data.title || config.defaultPageTitle;
   const description = data.seoDescription ? data.seoDescription : config.siteDescription;
 
   return {
-    title: data.title,
+    title,
     description: description,
     openGraph: {
       type: 'website',
       locale: 'en_US',
       url: data.canonicalUrl,
-      title: data.title,
+      title,
       description: description,
       images: [
         {

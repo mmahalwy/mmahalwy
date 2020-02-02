@@ -15,5 +15,5 @@
     "jsx": "preserve"
   },
   "exclude": ["node_modules"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "utils/post-list.js"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

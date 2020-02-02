@@ -1,27 +1,27 @@
 import React from 'react';
+import styled from 'styled-components';
 import Link from 'next/link';
 import { config } from '../config';
 import MainLayout from './layouts/MainLayout';
 import Anchor from './dls/Anchor';
 
+const Item = styled.li`
+  display: inline-block;
+  list-style-type: none;
+  height: 40px;
+  padding: 0px 16px;
+
+  &:first-child {
+    padding-left: 0px;
+  }
+`;
+
 export const NavigationItem = (props) => (
-  <li>
+  <Item>
     <Link href={props.data.link}>
       <Anchor href={props.data.link}>{props.data.text}</Anchor>
     </Link>
-    <style jsx>{`
-      li {
-        display: inline-block;
-        list-style-type: none;
-        height: 40px;
-        padding: 0px 16px;
-      }
-      a {
-        text-decoration: none;
-        font-size: 20px;
-      }
-    `}</style>
-  </li>
+  </Item>
 );
 
 const Navigation = () => (

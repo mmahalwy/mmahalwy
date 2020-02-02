@@ -1,4 +1,3 @@
-// @ts-ignore
 import image from '../public/static/images/my-pic.jpg';
 import { darken } from 'polished';
 

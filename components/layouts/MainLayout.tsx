@@ -7,7 +7,7 @@ type MainLayoutProps = {
 
 const Container = styled.div`
   max-width: 740px;
-  padding: 20px 20px 100px 20px;
+  padding: 20px 20px 20px 20px;
   position: relative;
   margin: 0px auto;
   width: 100%;

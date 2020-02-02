@@ -1,11 +1,13 @@
 import { formatSEODate, getSecondsSinceEpoch } from './formatters';
 import { config } from '../config';
 
-const postFileNames = () => {
-  // @ts-ignore
-  const postFileNames = preval`module.exports = require("fs").readdirSync("./pages/blog")` || [];
+const ignoreList = ['index.tsx', 'test.tsx', 'list.json'];
 
-  return Promise.resolve(postFileNames);
+const postFileNames = () => {
+  const postFileNames = require('../pages/blog/list.json') || [];
+  const filteredFileNames = postFileNames.filter((name) => !name || !ignoreList.includes(name));
+
+  return Promise.resolve(filteredFileNames);
 };
 
 const createPostList = (fileNameList) => {

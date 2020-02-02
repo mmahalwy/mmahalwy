@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "A starter kit for creating a static website blog using Next.js and MDX",
   "scripts": {
-    "dev": "NODE_ENV=development next",
-    "build": "NODE_ENV=production next build",
-    "build-dev": "NODE_ENV=development next build",
+    "generate-list": "node ./utils/generatePostList.js",
+    "dev": "npm run generate-list; NODE_ENV=development next",
+    "build": "npm run generate-list; NODE_ENV=production next build",
+    "build-dev": "npm run generate-list; NODE_ENV=development next build",
     "start": "NODE_ENV=production next start",
     "clean": "rm -rf .next ; npm ci ; NODE_ENV=development npm run dev",
     "test": "jest"

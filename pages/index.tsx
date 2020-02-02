@@ -1,5 +1,8 @@
 import Text from '../components/dls/Text';
 import Anchor from '../components/dls/Anchor';
+import { NextSeo } from 'next-seo';
+import { createSEOConfig } from '../utils/seo';
+import { config } from '../config';
 
 export const meta = {
   title: "Mo's website",
@@ -13,6 +16,13 @@ export const meta = {
 const Index = ({ allData }) => {
   return (
     <div>
+      <NextSeo {...createSEOConfig()} />
+      <img
+        src={config.websiteLogo}
+        width={32}
+        height={32}
+        style={{ borderRadius: '50%', marginBottom: 16 }}
+      />
       <Text>👋👋</Text>
       <Text>
         I am a software engineer at{' '}
