@@ -8,7 +8,6 @@
     "build-dev": "NODE_ENV=development next build",
     "start": "NODE_ENV=production next start",
     "clean": "rm -rf .next ; npm ci ; NODE_ENV=development npm run dev",
-    "now-build": "next build",
     "test": "jest"
   },
   "keywords": [
