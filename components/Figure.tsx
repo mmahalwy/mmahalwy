@@ -14,10 +14,16 @@ const Image = styled.img`
   width: 100%;
 `;
 
-const Figure = ({ src, alt, caption }) => (
+type FigureProps = {
+  src: string;
+  alt: string;
+  caption?: string;
+};
+
+const Figure = ({ src, alt, caption }: FigureProps) => (
   <Container>
     <Image src={src} alt={alt} />
-    <Caption>{caption}</Caption>
+    {caption && <Caption>{caption}</Caption>}
   </Container>
 );
 
