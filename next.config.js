@@ -12,10 +12,6 @@ const withMDX = require('@zeit/next-mdx')({
   },
 });
 
-module.exports = withFonts(
-  withOptimizedImages(
-    withMDX({
-      pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
-    }),
-  ),
-);
+module.exports = withMDX({
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
+});

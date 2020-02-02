@@ -2,6 +2,7 @@ import { formatSEODate, getSecondsSinceEpoch } from './formatters';
 import { config } from '../config';
 
 const postFileNames = () => {
+  // @ts-ignore
   const postFileNames = preval`module.exports = require("fs").readdirSync("./pages/blog")` || [];
 
   return Promise.resolve(postFileNames);
