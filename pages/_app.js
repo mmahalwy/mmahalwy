@@ -60,15 +60,7 @@ export default class MyApp extends App {
     return (
       <ThemeProvider theme={config.css}>
         <GlobalStyles />
-        <DefaultSeo
-          title="Mo's website"
-          description="Welcome to my site!"
-          twitter={{
-            handle: '@mmahalwy',
-            site: '@mmahalwy',
-            cardType: 'summary_large_image',
-          }}
-        />
+        <DefaultSeo {...createSEOConfig()} />
         {pageData && <NextSeo {...createSEOConfig(pageData)} />}
         {/* (2) navigation */}
         <Main>

@@ -1,11 +1,12 @@
-import image from '../public/static/images/my-pic.jpg';
+// @ts-ignore
+import image from '../public/static/images/my-pic.jpg?url';
 import { darken } from 'polished';
 
 export const config = {
   author: 'Mohamed El Mahallawy',
   siteName: 'mmahalwy',
-  siteDescription: 'The personal blog of Mo',
-  defaultPageTitle: 'mmahalwy',
+  siteDescription: 'Software engineer @Airbnb',
+  defaultPageTitle: "Mo's website",
   blogTitle: 'Blog',
   baseUrl: 'mmahalwy.com',
   websiteLogo: image,

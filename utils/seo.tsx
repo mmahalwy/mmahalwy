@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArticleJsonLd } from 'next-seo';
+import { ArticleJsonLd, NextSeoProps } from 'next-seo';
 import { config } from '../config';
 
 export function articleSEO(postData) {
@@ -27,9 +27,7 @@ type DataType = {
   canonicalUrl?: string;
 };
 
-export function createSEOConfig(data?: DataType) {
-  if (!data) return;
-
+export function createSEOConfig(data = {} as DataType): NextSeoProps {
   const title = data.title || config.defaultPageTitle;
   const description = data.seoDescription ? data.seoDescription : config.siteDescription;
 
@@ -47,7 +45,7 @@ export function createSEOConfig(data?: DataType) {
           url: config.websiteLogo,
           width: 280,
           height: 280,
-          alt: 'Demo image for Next.js MDX Blog kit',
+          alt: 'mmahalwy',
         },
       ],
       site_name: config.siteName,
