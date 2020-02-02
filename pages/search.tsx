@@ -17,7 +17,7 @@ function Search({ allData = [], router }) {
     const tagTopic = router.query.q;
 
     const items = posts
-      .filter((post) => post.tags.includes(tagTopic))
+      .filter((post) => (post.tags ? post.tags.includes(tagTopic) : false))
       .map((post, index) => <PostListing key={index} post={post} index={index} />);
 
     if (items.length) {
