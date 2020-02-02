@@ -13,7 +13,7 @@ const Container = styled.div`
 const BlogMeta = ({ data: { pageData } }) => {
   if (!pageData) {
     console.error('pageData not found!');
-    return 'Not found';
+    return <>Not found</>;
   }
 
   const { formattedPublishDate, hideProgressBar } = pageData;

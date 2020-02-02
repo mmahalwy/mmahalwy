@@ -1,7 +1,9 @@
+import BlogMeta from './BlogMeta';
 import { Title3, Title1, Title2 } from './dls/Title';
 import Text from './dls/Text';
 import Anchor from './dls/Anchor';
 import List from './dls/List';
+import Figure from './Figure';
 
 const components = {
   h1: Title1,
@@ -10,6 +12,8 @@ const components = {
   p: Text,
   a: Anchor,
   ul: List,
+  BlogMeta: BlogMeta,
+  Figure: Figure,
 };
 
 export default components;
