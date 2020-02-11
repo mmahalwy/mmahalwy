@@ -7,7 +7,6 @@ import Navigation from '../components/Navigation';
 import { createSEOConfig } from '../utils/seo';
 import GlobalStyles from '../components/GlobalStyles';
 import MdxComponents from '../components/MdxComponents';
-import { checkForSW } from '../utils/check-for-sw';
 import { config } from '../config';
 import MainLayout from '../components/layouts/MainLayout';
 
@@ -21,7 +20,6 @@ export default class MyApp extends App {
   async componentDidMount() {
     ReactGA.initialize('UA-155281306-1');
     this.logPageView();
-    await checkForSW();
   }
 
   componentDidUpdate() {
