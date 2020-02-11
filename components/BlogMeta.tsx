@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import { NextSeo } from 'next-seo';
 import TagBlock from '../components/Tags';
 import ReadingProgress from '../components/ReadingProgress';
-import { articleSEO } from '../utils/seo';
+import { articleSEO, createSEOConfig } from '../utils/seo';
 import { formatDisplayDate, formatSEODate } from '../utils/formatters';
 import Text from './dls/Text';
 
@@ -34,6 +35,7 @@ const BlogMeta = ({ meta }) => {
   return (
     <Container>
       {meta.hideProgressBar ? null : <ReadingProgress />}
+      <NextSeo {...createSEOConfig(meta)} />
       <h1>{meta.title}</h1>
       <Text>
         <small className="post-date">{formatDisplayDate(formattedPublishDate)}</small>

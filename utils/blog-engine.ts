@@ -1,5 +1,4 @@
 import { posts } from './post-list';
-// import { pages } from './page-list';
 
 export default (type = 'all') => {
   // these lists are already sorted from newest to oldest

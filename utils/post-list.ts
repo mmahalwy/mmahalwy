@@ -15,7 +15,6 @@ const createPostList = (fileNameList) => {
     // These are properties we want to extract from the file's meta export.
     // This data is returned is added to the `collection` array below.
     const {
-      default: Component,
       meta: {
         title,
         tags,
