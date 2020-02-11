@@ -5,13 +5,11 @@ import ReactGA from 'react-ga';
 import { MDXProvider } from '@mdx-js/react';
 import Navigation from '../components/Navigation';
 import { createSEOConfig } from '../utils/seo';
-import getPostData from '../utils/get-post-data';
-import BlogEngine from '../utils/blog-engine';
-import { renderLayout } from '../utils/render-app-layout';
 import GlobalStyles from '../components/GlobalStyles';
 import MdxComponents from '../components/MdxComponents';
 import { checkForSW } from '../utils/check-for-sw';
 import { config } from '../config';
+import MainLayout from '../components/layouts/MainLayout';
 
 const Main = styled.main`
   display: flex;
@@ -20,22 +18,6 @@ const Main = styled.main`
   min-height: 100vh;
 `;
 export default class MyApp extends App {
-  static async getInitialProps({ Component, router, ctx, ...other }) {
-    let pageProps = {};
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
-    }
-
-    const [allData, pageData] = await Promise.all([
-      BlogEngine(),
-      getPostData(ctx.pathname),
-    ]).catch((error) => console.error('Error in _app.js getInitialProps()', error));
-
-    const propsObj = Object.assign({}, { pageData, allData, ...pageProps });
-
-    return { ...propsObj };
-  }
-
   async componentDidMount() {
     ReactGA.initialize('UA-155281306-1');
     this.logPageView();
@@ -55,20 +37,23 @@ export default class MyApp extends App {
   }
 
   render() {
-    const { pageData } = this.props;
+    const { Component, pageProps } = this.props;
 
     return (
       <ThemeProvider theme={config.css}>
         <GlobalStyles />
         <DefaultSeo {...createSEOConfig()} />
-        {pageData && <NextSeo {...createSEOConfig(pageData)} />}
         {/* (2) navigation */}
         <Main>
           <Navigation />
 
           {/* (3) page body */}
           <React.Fragment>
-            <MDXProvider components={MdxComponents}>{renderLayout(this.props)}</MDXProvider>
+            <MDXProvider components={MdxComponents}>
+              <MainLayout>
+                <Component {...pageProps} />
+              </MainLayout>
+            </MDXProvider>
           </React.Fragment>
 
           {/* (4) footer */}

@@ -1,7 +1,10 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import MainLayout from '../components/layouts/MainLayout';
 import PostListing from '../components/PostListing';
 import { Title1 } from '../components/dls/Title';
+import { NextPage } from 'next';
+import blogEngine from '../utils/blog-engine';
 
 export const meta = {
   title: 'Search',
@@ -12,7 +15,9 @@ export const meta = {
   seoDescription: 'This page lists all posts with a given tag.',
 };
 
-function Search({ allData = [], router }) {
+const Search: NextPage<any> = ({ allData = [] }) => {
+  const router = useRouter();
+
   const renderListItems = (posts) => {
     const tagTopic = router.query.q;
 
@@ -27,12 +32,19 @@ function Search({ allData = [], router }) {
     }
   };
   const blogPosts = allData.filter((content) => content.type == 'post');
+
   return (
     <MainLayout>
       <Title1>Posts tagged: {router.query.q}</Title1>
       {renderListItems(blogPosts)}
     </MainLayout>
   );
-}
+};
+
+Search.getInitialProps = async () => {
+  const allData = blogEngine();
+
+  return { allData };
+};
 
 export default Search;

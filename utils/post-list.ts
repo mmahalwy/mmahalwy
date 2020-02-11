@@ -3,29 +3,31 @@ import { config } from '../config';
 
 const ignoreList = ['index.tsx', 'test.tsx', 'list.json'];
 
-const postFileNames = () => {
+const postFileNames = (): string[] => {
   const postFileNames = require('../pages/blog/list.json') || [];
   const filteredFileNames = postFileNames.filter((name) => !name || !ignoreList.includes(name));
 
-  return Promise.resolve(filteredFileNames);
+  return filteredFileNames;
 };
 
 const createPostList = (fileNameList) => {
   return fileNameList.reduce((collection, name) => {
     // These are properties we want to extract from the file's meta export.
     // This data is returned is added to the `collection` array below.
-    const { default: Component } = require(`../pages/blog/${name}`);
     const {
-      title,
-      tags,
-      layout,
-      publishDate,
-      modifiedDate,
-      seoDescription,
-      hideProgressBar = false,
-      exclude = false,
-      ...moreMeta // any extra properties a post may have
-    } = require(`../pages/blog/${name}`).meta;
+      default: Component,
+      meta: {
+        title,
+        tags,
+        layout,
+        publishDate,
+        modifiedDate,
+        seoDescription,
+        hideProgressBar = false,
+        exclude = false,
+        ...moreMeta // any extra properties a post may have
+      },
+    } = require(`../pages/blog/${name}`);
 
     if (exclude) return collection;
 
@@ -44,7 +46,6 @@ const createPostList = (fileNameList) => {
 
     // data that is returned for each page
     collection.push({
-      Component,
       title,
       tags,
       layout,
@@ -68,14 +69,11 @@ const createPostList = (fileNameList) => {
   }, []);
 };
 
-export function posts() {
-  return postFileNames()
-    .then((fileNameList) => {
-      const postList = createPostList(fileNameList);
-      const sortedList = postList
-        .sort((a, b) => a.secondsSinceEpoch - b.secondsSinceEpoch)
-        .reverse();
-      return sortedList;
-    })
-    .catch((error) => console.log('Error creating postList', error));
+export function posts(): any[] {
+  const fileNameList = postFileNames();
+
+  const postList = createPostList(fileNameList);
+  const sortedList = postList.sort((a, b) => a.secondsSinceEpoch - b.secondsSinceEpoch).reverse();
+
+  return sortedList;
 }

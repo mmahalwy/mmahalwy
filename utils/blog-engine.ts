@@ -1,9 +1,9 @@
 import { posts } from './post-list';
 // import { pages } from './page-list';
 
-export default async (type = 'all') => {
+export default (type = 'all') => {
   // these lists are already sorted from newest to oldest
-  const [postList] = await Promise.all([posts()]);
+  const postList = posts();
 
   // after combining the lists, they must be sorted again
   const allData = postList;
@@ -12,8 +12,6 @@ export default async (type = 'all') => {
   switch (type) {
     case 'posts':
       return postList;
-    case 'pages':
-      return pagesList;
     case 'all':
     default:
       return sortedAllData;

@@ -1,5 +1,7 @@
 import React from 'react';
+import { NextPage } from 'next';
 import PostListing from '../../components/PostListing';
+import BlogEngine from '../../utils/blog-engine';
 
 export const meta = {
   title: 'Blog',
@@ -10,7 +12,7 @@ export const meta = {
   seoDescription: 'Blog',
 };
 
-function Blog({ allData = [] }) {
+const Blog: NextPage<any> = ({ allData = [], ...p }) => {
   const blogPosts = allData.filter((content) => content.type == 'post');
 
   return (
@@ -20,6 +22,12 @@ function Blog({ allData = [] }) {
       ))}
     </>
   );
-}
+};
+
+Blog.getInitialProps = async () => {
+  const allData = BlogEngine();
+
+  return { allData };
+};
 
 export default Blog;
