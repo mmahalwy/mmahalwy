@@ -39,7 +39,10 @@ export default class MyDocument extends Document {
           />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/static/icons/favicon.ico" />
-
+          <meta
+            name="google-site-verification"
+            content="t97GlICC8lT0XaJq1nl7jUbKQuUZptIoQ9WBrMavRCs"
+          />
           <link rel="manifest" href="/manifest.json" />
           <meta name="theme-color" content={config.css.primaryColor} />
 
