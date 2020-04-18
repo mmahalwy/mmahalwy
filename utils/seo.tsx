@@ -25,6 +25,7 @@ type DataType = {
   title?: string;
   seoDescription?: string;
   canonicalUrl?: string;
+  images?: Array<{ url: string; width?: number; height?: number; alt?: string }>;
 };
 
 export function createSEOConfig(data = {} as DataType): NextSeoProps {
@@ -40,7 +41,7 @@ export function createSEOConfig(data = {} as DataType): NextSeoProps {
       url: data.canonicalUrl,
       title,
       description: description,
-      images: [
+      images: data.images ?? [
         {
           url: config.websiteLogo,
           width: 280,
