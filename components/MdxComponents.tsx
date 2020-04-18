@@ -4,6 +4,7 @@ import Text from './dls/Text';
 import Anchor from './dls/Anchor';
 import List from './dls/List';
 import Figure from './Figure';
+import Button from './dls/Button';
 
 const components = {
   h1: Title1,
@@ -14,6 +15,7 @@ const components = {
   ul: List,
   BlogMeta: BlogMeta,
   Figure: Figure,
+  Button: Button,
 };
 
 export default components;
