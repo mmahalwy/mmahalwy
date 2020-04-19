@@ -18,6 +18,11 @@ export const Title4 = styled.h4`
   ${commonStyles}
 `;
 
+export const Strong = styled.strong`
+  color: ${(props) => props.theme.white};
+  font-weight: 500;
+`;
+
 const Title = Title2;
 
 export default Title;
