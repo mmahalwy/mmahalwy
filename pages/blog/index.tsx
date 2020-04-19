@@ -24,10 +24,10 @@ const Blog: NextPage<any> = ({ allData = [], ...p }) => {
   );
 };
 
-Blog.getInitialProps = async () => {
+export const getStaticProps = async () => {
   const allData = BlogEngine();
 
-  return { allData };
+  return { props: { allData } };
 };
 
 export default Blog;

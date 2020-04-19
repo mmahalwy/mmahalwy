@@ -4,7 +4,7 @@ import MainLayout from '../components/layouts/MainLayout';
 import PostListing from '../components/PostListing';
 import { Title1 } from '../components/dls/Title';
 import { NextPage } from 'next';
-import blogEngine from '../utils/blog-engine';
+import BlogEngine from '../utils/blog-engine';
 
 export const meta = {
   title: 'Search',
@@ -41,10 +41,10 @@ const Search: NextPage<any> = ({ allData = [] }) => {
   );
 };
 
-Search.getInitialProps = async () => {
-  const allData = blogEngine();
+export const getStaticProps = async () => {
+  const allData = BlogEngine();
 
-  return { allData };
+  return { props: { allData } };
 };
 
 export default Search;
