@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { rgba } from 'polished';
 
 const Anchor = styled.a`
-  color: ${(props) => props.theme.primaryColor};
+  color: ${(props) => props.theme.white};
   cursor: pointer;
   text-decoration: none;
 
