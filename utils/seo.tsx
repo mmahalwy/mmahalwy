@@ -11,8 +11,8 @@ export function articleSEO(postData) {
       url={postData.canonicalUrl}
       title={postData.title}
       images={[config.websiteLogo]}
-      datePublished={postData.formattedPublishDate}
-      dateModified={postData.formattedModifiedDate}
+      datePublished={postData.publishDate}
+      dateModified={postData.modifiedDate}
       authorName={config.author}
       publisherName={config.author}
       publisherLogo={config.websiteLogo}

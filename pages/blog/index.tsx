@@ -7,6 +7,7 @@ export const meta = {
   title: 'Blog',
   tags: [],
   layout: 'blog-post-list',
+  description: 'Blog',
   publishDate: '',
   modifiedDate: false,
   seoDescription: 'Blog',
