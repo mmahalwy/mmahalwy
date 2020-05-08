@@ -1,7 +1,7 @@
 import BlogMeta from './BlogMeta';
 import { Title3, Title1, Title2, Strong } from './dls/Title';
 import Text from './dls/Text';
-import Anchor from './dls/Anchor';
+import Anchor, { OutboundAnchor } from './dls/Anchor';
 import List from './dls/List';
 import Figure from './Figure';
 import Button from './dls/Button';
@@ -13,6 +13,8 @@ const components = {
   h3: Title3,
   p: Text,
   a: Anchor,
+  Anchor: Anchor,
+  OutboundAnchor: OutboundAnchor,
   ul: List,
   BlogMeta: BlogMeta,
   Figure: Figure,
