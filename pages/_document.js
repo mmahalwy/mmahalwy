@@ -33,10 +33,8 @@ export default class MyDocument extends Document {
     return (
       <html lang="en">
         <Head>
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
-          />
+          <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/static/icons/favicon.ico" />
           <meta

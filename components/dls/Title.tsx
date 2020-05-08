@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 const commonStyles = css`
   letter-spacing: 1px;
-  color: ${(props) => props.theme.white};
+  color: ${(props) => props.theme.black};
 `;
 
 export const Title1 = styled.h1`
@@ -19,7 +19,7 @@ export const Title4 = styled.h4`
 `;
 
 export const Strong = styled.strong`
-  color: ${(props) => props.theme.white};
+  color: ${(props) => props.theme.textColor};
   font-weight: 500;
 `;
 

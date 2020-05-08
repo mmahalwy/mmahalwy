@@ -23,13 +23,13 @@ export const config = {
     },
   ],
   css: {
-    primaryColor: '#536DFE',
+    primaryColor: '#111',
     accentColor: '#455A64',
     lightGray: '#eeeeee',
-    backgroundColor: '#111',
+    backgroundColor: '#fff',
     black: '#111',
     white: '#fff',
-    textColor: darken(0.3, '#fff'),
+    textColor: '#333',
     opacity: 0.7,
   },
 };
