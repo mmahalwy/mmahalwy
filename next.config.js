@@ -3,7 +3,6 @@ const withFonts = require('next-fonts');
 const images = require('remark-images');
 const emoji = require('remark-emoji');
 const withOptimizedImages = require('next-optimized-images');
-const withOffline = require('next-offline');
 const withMDX = require('@zeit/next-mdx')({
   // parse mdx files
   extension: /\.mdx?$/,
@@ -13,12 +12,10 @@ const withMDX = require('@zeit/next-mdx')({
   },
 });
 
-module.exports = withOffline(
-  withFonts(
-    withOptimizedImages(
-      withMDX({
-        pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
-      }),
-    ),
+module.exports = withFonts(
+  withOptimizedImages(
+    withMDX({
+      pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
+    }),
   ),
 );
