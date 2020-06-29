@@ -15,7 +15,7 @@ export const meta = {
 
 const Blog: NextPage<any> = ({ allData = [], ...p }) => {
   const blogPosts = allData.filter((content) => content.type == 'post');
-
+  console.log('asdasdsd');
   return (
     <>
       {blogPosts.map((post, index) => (

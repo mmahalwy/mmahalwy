@@ -10,4 +10,5 @@ export const TAGS = {
   INVESTING: 'investing',
   REAL_ESTATE: 'real estate',
   TECH: 'tech',
+  ENGINEERING: 'engineering',
 };

@@ -1,7 +1,7 @@
 {
-  "name": "next-mdx-static-blog-kit",
+  "name": "mmahalwy",
   "version": "1.0.0",
-  "description": "A starter kit for creating a static website blog using Next.js and MDX",
+  "description": "Mo's personal website",
   "scripts": {
     "generate-list": "node ./utils/generatePostList.js",
     "dev": "npm run generate-list; NODE_ENV=development next",
@@ -17,7 +17,7 @@
     "blog",
     "mdx"
   ],
-  "author": "Loren Stewart",
+  "author": "Mohamed El Mahallawy",
   "license": "ISC",
   "bin": {
     "blog": "cli.js"
@@ -34,7 +34,7 @@
     "js-yaml": "^3.13.1",
     "js-yaml-loader": "^1.2.2",
     "lodash": "^4.17.15",
-    "next": "^9.3.5",
+    "next": "^9.4.4",
     "next-fonts": "^0.19.0",
     "next-offline": "^5.0.0",
     "next-seo": "^4.4.0",

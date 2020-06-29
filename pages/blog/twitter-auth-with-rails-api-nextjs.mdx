@@ -1,0 +1,331 @@
+import { TAGS } from '../../utils/constants';
+import railsApiImage from '../../public/static/images/rails-api.jpg';
+
+export const meta = {
+  title: 'Twitter auth with Rails api + Nextjs',
+  tags: [TAGS.ENGINEERING],
+  layout: 'post',
+  publishDate: '2020-06-28',
+  modifiedDate: false,
+  seoDescription: 'A guide to Twitter authentication on Rails API and Nextjs',
+  exclude: false,
+  images: [
+    {
+      url: railsApiImage,
+    },
+  ],
+};
+
+While working on a recent project, I found it very difficult to find guides about how to hook up a Rails API to Nextjs (or create-react-app for that matter). Initially, I couldn't figure out how to get authentication to work on the API side, then be passed on to the client. This guide goes over it.
+
+What this guide will cover:
+
+- Setting up Devise, Devise-jwt and Omniauth for Twitter
+- Code needed to get the API side working for the client
+- Code needed on the client to start the auth process and save the JWT token
+
+What it will not cover:
+
+- Setting up Rails
+- Setting up Nextjs or create-react-app
+
+Let's dive in!
+
+### Setting up Rails API with Devise, Devise-jwt and Omniauth
+
+We will use Devise as the authentication library. Devise comes with many powerful features that make it very easy to manage authentication across your app, whether through email/password or other methods such as social.
+
+Secondly, we will use [Devise-jwt](https://github.com/waiting-for-dev/devise-jwt) library for managing our JWT authentication that's sitting on top of Devise. The two allow us to take advantage of JWT to manage authentication from an API perspective, and to easily store a token on the client. It's also universal, so we can have our API easily power web and mobile.
+
+### Code needed to get the API side working for the client
+
+Your Gemfile should include these:
+
+```ruby
+gem "rack-cors"
+gem "devise"
+gem "devise-jwt", "~> 0.6.0"
+
+gem "omniauth"
+gem "omniauth-twitter"
+gem "omniauth-google-oauth2"
+```
+
+Steps:
+
+- Follow the Devise README file for setting up Devise and a user model
+- Follow Devise-jwt README file for setting up your JWT
+  1. Setup a secret for your JWT token through `bundle exec rake secret` and store it in your credentials
+- Inside your `config/initializers/devise.rb` file, add the following. We are setting the paths that will be picked up by devise-JWT for logging in, logging out and omniauth callbacks. Only these paths will allow JWT to be generated and accessed.
+
+```ruby
+config.omniauth :twitter, Rails.application.credentials.dig(:twitter, :api_key), Rails.application.credentials.dig(:twitter, :api_secret)
+config.omniauth :google_oauth2, Rails.application.credentials.dig(:google, :api_key), Rails.application.credentials.dig(:google, :api_secret)
+
+config.jwt do |jwt|
+  jwt.secret = Rails.application.credentials.dig(:jwt_key)
+  jwt.dispatch_requests = [
+      ["POST", %r{^/login$}],
+      ["GET", %r{^/auth/twitter/callback$}],
+      ["GET", %r{^/auth/google_oauth2/callback$}]
+    ]
+  jwt.revocation_requests = [
+    ["DELETE", %r{^/logout$}]
+  ]
+  jwt.expiration_time = 2.weeks.to_i
+end
+```
+
+- Your `app/models/user.rb` file should include this. This includes 2 important features `omniauthable` for omniauth support and `:jwt_authenticatable, jwt_revocation_strategy: self` for JWT authentication. There are many revocation strategies listed [here](https://github.com/waiting-for-dev/devise-jwt#jtimatcher) but we decided to go with [JTIMatcher](https://github.com/waiting-for-dev/devise-jwt#jtimatcher).
+
+```ruby
+devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable,
+         :trackable, :omniauthable,
+         :jwt_authenticatable, jwt_revocation_strategy: self, omniauth_providers: %i[twitter google_oauth2]
+```
+
+- Create an omniauth callbacks file at `app/controllers/omniauth_callbacks_controller.rb`. This controller's actions will be called on the omniauth callback.
+
+```ruby
+class OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  def passthru
+  end
+
+  def twitter
+    resource = User.from_omniauth(request.env["omniauth.auth"], request.env["omniauth.params"].dig("user_id"))
+
+    sign_in(resource_name, resource)
+    # Redirect back to client after successful authentication!
+    redirect_to "#{redirect_url}/auth?jwt=#{request.env["warden-jwt_auth.token"]}"
+  end
+
+  def google_oauth2
+    resource = User.from_omniauth(request.env["omniauth.auth"], request.env["omniauth.params"].dig("user_id"))
+
+    sign_in(resource_name, resource)
+    # Redirect back to client after successful authentication!
+    redirect_to "#{redirect_url}/auth?jwt=#{request.env["warden-jwt_auth.token"]}"
+  end
+
+  private
+    def redirect_url
+      # will pick up source_url if specified in the initial /auth/twitter request. If not set, fall back to defaults.
+      request.env["omniauth.params"].dig("source_url") || (
+        Rails.env.production? ? "https://YOUR_WEBSITE_HERE.com" : "http://localhost:8000")
+    end
+end
+```
+
+- We need to make some route changes:
+
+```ruby
+devise_for :users,
+  path: "",
+  path_names: {
+    sign_in: "login",
+    sign_out: "logout",
+    registration: "signup"
+  },
+  controllers: {
+    sessions: "sessions",
+    registrations: "registrations",
+    omniauth_callbacks: "omniauth_callbacks"
+  }
+```
+
+- Finally, omniauth requires a session to work. We need to add these to Rails at `application.rb` file:
+
+```ruby
+config.session_store :cookie_store, key: "_shepherd_session"
+config.middleware.use ActionDispatch::Cookies # Required for all session management
+config.middleware.use ActionDispatch::Session::CookieStore, config.session_options
+```
+
+What we have setup will do the following:
+
+- When going to `/auth/twitter`, the request will be picked up with omniauth and start the oauth dance
+- Once user has successfully authenticated their social login, they will then be redirected to `/auth/twitter/callback` which is then picked up by our `OmniauthCallbacksController`
+- We then create or update the account, sign them in to generate a JWT token and redirect them back to the client (or anywhere you'd like!).
+
+### Code needed on the client to start the auth process and save the JWT token
+
+- Create a `TwitterAuthButton` file:
+
+```tsx
+import React, { ReactNode } from 'react';
+import queryString from 'query-string';
+import Button from './dls/Button';
+import { Twitter } from '@styled-icons/boxicons-logos/Twitter';
+import { authenticate } from '../utils/authentication';
+import { API_URL } from '../constants';
+import { useRouter } from 'next/router';
+import useToasts from '../hooks/useToasts';
+
+type TwitterAuthButtonProps = {
+  block?: boolean;
+  userId?: number;
+  children?: ReactNode;
+};
+
+const TwitterAuthButton = ({
+  block,
+  userId,
+  children = 'Sign in with Twitter',
+}: TwitterAuthButtonProps) => {
+  const { push } = useRouter();
+  const { addSuccessToast } = useToasts();
+
+  const handleAuth = () => {
+    const q = queryString.stringify({ source_url: window.location.origin, user_id: userId });
+
+    authenticate({
+      provider: 'twitter',
+      url: `${API_URL}/auth/twitter?${q}`,
+      cb: () => {
+        addSuccessToast('Logged in successfully');
+        push('/');
+      },
+    });
+  };
+
+  return (
+    <Button onClick={handleAuth} block={block}>
+      <Twitter size={20} /> {children}
+    </Button>
+  );
+};
+
+export default TwitterAuthButton;
+```
+
+- authenticate method
+
+```tsx
+export const authenticate = ({ provider, url, tab = false, cb }: AuthenticateArg) => {
+  let name = tab ? '_blank' : provider;
+  openPopup(provider, url, name);
+
+  function receiveMessage(event) {
+    // Do we trust the sender of this message?  (might be
+    // different from what we originally opened, for example).
+    if (event.origin !== window.location.origin) {
+      return;
+    }
+
+    if (event.data.jwt && event.data.success) {
+      cb();
+    }
+  }
+
+  window.addEventListener('message', receiveMessage, false);
+};
+```
+
+- openpopup:
+
+```tsx
+/* istanbul ignore next */
+var settings =
+  'scrollbars=no,toolbar=no,location=no,titlebar=no,directories=no,status=no,menubar=no';
+
+/* istanbul ignore next */
+function getPopupOffset({ width, height }) {
+  var wLeft = window.screenLeft ? window.screenLeft : window.screenX;
+  var wTop = window.screenTop ? window.screenTop : window.screenY;
+
+  var left = wLeft + window.innerWidth / 2 - width / 2;
+  var top = wTop + window.innerHeight / 2 - height / 2;
+
+  return { top, left };
+}
+
+/* istanbul ignore next */
+function getPopupSize(provider) {
+  switch (provider) {
+    case 'facebook':
+      return { width: 580, height: 400 };
+
+    case 'google':
+      return { width: 452, height: 633 };
+
+    case 'github':
+      return { width: 1020, height: 618 };
+
+    case 'linkedin':
+      return { width: 527, height: 582 };
+
+    case 'twitter':
+      return { width: 495, height: 645 };
+
+    case 'live':
+      return { width: 500, height: 560 };
+
+    case 'yahoo':
+      return { width: 559, height: 519 };
+
+    default:
+      return { width: 1020, height: 618 };
+  }
+}
+
+/* istanbul ignore next */
+function getPopupDimensions(provider) {
+  let { width, height } = getPopupSize(provider);
+  let { top, left } = getPopupOffset({ width, height });
+
+  return `width=${width},height=${height},top=${top},left=${left}`;
+}
+
+/* istanbul ignore next */
+export default function openPopup(provider, url, name) {
+  return window.open(url, name, `${settings},${getPopupDimensions(provider)}`);
+}
+```
+
+- Finally, the route that a user will land on when redirected from the API
+
+```tsx
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useCookies } from 'react-cookie';
+import queryString from 'query-string';
+import { Title1 } from '../components/dls/Title';
+
+const Auth = () => {
+  const router = useRouter();
+  const [, setCookie] = useCookies();
+  const {
+    query: { jwt },
+  } = queryString.parseUrl(router.asPath);
+
+  useEffect(() => {
+    if (jwt) {
+      setCookie('jwt', jwt);
+      window.opener.postMessage(
+        {
+          jwt,
+          success: true,
+        },
+        '*',
+      );
+      window.close();
+    }
+  }, []);
+
+  return <div>{jwt ? <Title1>Loading...</Title1> : <Title1>Authentication failed</Title1>}</div>;
+};
+
+export default Auth;
+```
+
+Let's break this down and how this comes together:
+
+- A user clicks the button and we open up a popup directing the user to the API server at `/auth/twitter` path
+- After successful authentication, the user will be redirect to the client server at `/auth?jwt=THE_JWT_TOKEN` path
+- This is then picked up, set in cookie and we fire off a `postMessage` to the opener window (where the user clicked the button initially) and close the popup window
+- Great! On the initial window (where the user clicked the button initially) we call the callback which will reroute (through a router `push`) the user to the homepage and fire off a success toast
+
+### Would love your feedback on this post and future posts
+
+Did this work for you? Let me know on Twitter at [@mmahalwy](https://twitter.com/mmahalwy). If it did not for some reason, also let me know. We can debug it together and make sure you're up and running.

@@ -29,6 +29,10 @@ export const options = {
 const rebootCss = reboot(options);
 
 const GlobalStyles = createGlobalStyle`
+  button{
+    background-color: #000;
+  }
+
   ${rebootCss}
   /* other styles */
 `;
