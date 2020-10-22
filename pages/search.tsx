@@ -1,9 +1,9 @@
 import React from 'react';
 import { useRouter } from 'next/router';
+import { NextPage } from 'next';
+import { Heading } from '@chakra-ui/core';
 import MainLayout from '../components/layouts/MainLayout';
 import PostListing from '../components/PostListing';
-import { Title1 } from '../components/dls/Title';
-import { NextPage } from 'next';
 import BlogEngine from '../utils/blog-engine';
 
 export const meta = {
@@ -23,19 +23,20 @@ const Search: NextPage<any> = ({ allData = [] }) => {
 
     const items = posts
       .filter((post) => (post.tags ? post.tags.includes(tagTopic) : false))
-      .map((post, index) => <PostListing key={index} post={post} index={index} />);
+      .map((post, index) => (
+        <PostListing key={index} post={post} index={index} />
+      ));
 
     if (items.length) {
       return items;
-    } else {
-      return <h2 key="not-found-headline">No results</h2>;
     }
+    return <h2 key="not-found-headline">No results</h2>;
   };
   const blogPosts = allData.filter((content) => content.type == 'post');
 
   return (
     <MainLayout>
-      <Title1>Posts tagged: {router.query.q}</Title1>
+      <Heading>Posts tagged: {router.query.q}</Heading>
       {renderListItems(blogPosts)}
     </MainLayout>
   );
