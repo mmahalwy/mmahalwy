@@ -1,28 +1,27 @@
-import styled from 'styled-components';
+/* eslint-disable react/jsx-props-no-spreading */
+import React from 'react';
+
+import { Link } from '@chakra-ui/core';
+import NextLink from 'next/link';
 import { OutboundLink } from 'react-ga';
 
-const Anchor = styled.a`
-  color: ${(props) => props.theme.black};
-  font-weight: bold;
-  cursor: pointer;
-  text-decoration: none;
+const Anchor = (props) => {
+  // eslint-disable-next-line react/prop-types
+  const { href } = props;
+  // eslint-disable-next-line react/prop-types
+  const isInternalLink = href && (href.startsWith('/') || href.startsWith('#'));
 
-  &:hover {
-    color: ${(props) => props.theme.black};
-    text-decoration: underline;
+  if (isInternalLink) {
+    return (
+      <NextLink href={href} passHref>
+        <Link textDecoration="underline" {...props} />
+      </NextLink>
+    );
   }
-`;
 
-export const OutboundAnchor = styled(OutboundLink)`
-  color: ${(props) => props.theme.black};
-  font-weight: bold;
-  cursor: pointer;
-  text-decoration: none;
-
-  &:hover {
-    color: ${(props) => props.theme.black};
-    text-decoration: underline;
-  }
-`;
+  return (
+    <Link as={OutboundLink} textDecoration="underline" isExternal {...props} />
+  );
+};
 
 export default Anchor;

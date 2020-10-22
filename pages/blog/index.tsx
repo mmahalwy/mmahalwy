@@ -13,13 +13,13 @@ export const meta = {
   seoDescription: 'Blog',
 };
 
-const Blog: NextPage<any> = ({ allData = [], ...p }) => {
-  const blogPosts = allData.filter((content) => content.type == 'post');
-  console.log('asdasdsd');
+const Blog: NextPage<any> = ({ allData = [] }) => {
+  const blogPosts = allData.filter((content) => content.type === 'post');
+
   return (
     <>
       {blogPosts.map((post, index) => (
-        <PostListing key={index} post={post} index={index} />
+        <PostListing key={post.title} post={post} index={index} />
       ))}
     </>
   );

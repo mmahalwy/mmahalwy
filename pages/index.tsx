@@ -1,8 +1,11 @@
-import Text from '../components/dls/Text';
-import Anchor from '../components/dls/Anchor';
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable react/jsx-props-no-spreading */
+import React from 'react';
 import { NextSeo } from 'next-seo';
+import { Heading, Text } from '@chakra-ui/core';
 import { createSEOConfig } from '../utils/seo';
 import { config } from '../config';
+import Anchor from '../components/dls/Anchor';
 
 export const meta = {
   title: "Mo's website",
@@ -13,17 +16,18 @@ export const meta = {
   seoDescription: 'Welcome to my site!',
 };
 
-const Index = ({ allData }) => {
+const Index = () => {
   return (
     <div>
       <NextSeo {...createSEOConfig()} />
       <img
         src={config.websiteLogo}
+        alt="mmahalwy"
         width={32}
         height={32}
         style={{ borderRadius: '50%', marginBottom: 16 }}
       />
-      <Text>👋👋</Text>
+      <Heading mb={4}>Hi, I'm Mo</Heading>
       <Text>
         I am a software engineer at{' '}
         <Anchor href="https://airbnb.com" target="_blank">

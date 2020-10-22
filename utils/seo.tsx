@@ -4,8 +4,11 @@ import { config } from '../config';
 
 export function articleSEO(postData) {
   if (!postData) return;
-  const description = postData.seoDescription ? postData.seoDescription : config.siteDescription;
+  const description = postData.seoDescription
+    ? postData.seoDescription
+    : config.siteDescription;
 
+  // eslint-disable-next-line consistent-return
   return (
     <ArticleJsonLd
       url={postData.canonicalUrl}
@@ -25,22 +28,29 @@ type DataType = {
   title?: string;
   seoDescription?: string;
   canonicalUrl?: string;
-  images?: Array<{ url: string; width?: number; height?: number; alt?: string }>;
+  images?: Array<{
+    url: string;
+    width?: number;
+    height?: number;
+    alt?: string;
+  }>;
 };
 
-export function createSEOConfig(data = {} as DataType): NextSeoProps {
+export function createSEOConfig(data: DataType = {}): NextSeoProps {
   const title = data.title || config.defaultPageTitle;
-  const description = data.seoDescription ? data.seoDescription : config.siteDescription;
+  const description = data.seoDescription
+    ? data.seoDescription
+    : config.siteDescription;
 
   return {
     title,
-    description: description,
+    description,
     openGraph: {
       type: 'website',
       locale: 'en_US',
       url: data.canonicalUrl,
       title,
-      description: description,
+      description,
       images: data.images ?? [
         {
           url: config.websiteLogo,

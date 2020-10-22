@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Link from 'next/link';
 import { config } from '../config';
 import MainLayout from './layouts/MainLayout';
 import Anchor from './dls/Anchor';
@@ -16,11 +15,16 @@ const Item = styled.li`
   }
 `;
 
-export const NavigationItem = (props) => (
+type NavigationItemProps = {
+  data: {
+    link: string;
+    text: string;
+  };
+};
+
+export const NavigationItem = ({ data }: NavigationItemProps) => (
   <Item>
-    <Link href={props.data.link}>
-      <Anchor href={props.data.link}>{props.data.text}</Anchor>
-    </Link>
+    <Anchor href={data.link}>{data.text}</Anchor>
   </Item>
 );
 

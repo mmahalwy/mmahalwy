@@ -1,4 +1,5 @@
-import Document, { Head, Main, NextScript } from 'next/document';
+import Document, { Html, Head, Main, NextScript } from 'next/document';
+import GoogleFonts from 'next-google-fonts';
 import { ServerStyleSheet } from 'styled-components';
 import { config } from '../config';
 
@@ -31,10 +32,9 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <html lang="en">
+      <Html lang="en">
+        {/* <GoogleFonts href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" /> */}
         <Head>
-          <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
-
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/static/icons/favicon.ico" />
           <meta
@@ -52,16 +52,16 @@ export default class MyDocument extends Document {
 
           <meta name="msapplication-TileColor" content={config.css.primaryColor} />
           <meta name="msapplication-TileImage" content="/static/icons/favicon-32x32.png" />
-          <link
+          {/* <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-tomorrow.min.css"
-          />
+          /> */}
         </Head>
         <body>
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     );
   }
 }

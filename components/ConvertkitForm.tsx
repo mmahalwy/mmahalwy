@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
-import Spacing from './dls/Spacing';
-import Text from './dls/Text';
-import Anchor from './dls/Anchor';
+import { Box, Text } from '@chakra-ui/core';
 import meAnimationGif from '../public/static/images/me-animation.gif';
+import Anchor from './dls/Anchor';
 
 const ConvertkitForm = () => {
   const [showEmail, setShowEmail] = useState(false);
 
   return (
     <>
-      <Spacing my={4}>
+      <Box my={4}>
         <hr />
-      </Spacing>
+      </Box>
       <Text>
         If you enjoyed this post, feel free to follow me on{' '}
-        <Anchor href="https://twitter.com/mmahalwy">Twitter</Anchor> or{' '}
-        <Anchor href="mailto:mmahalwy@gmail.com" target="_blank">
+        <Anchor isExternal href="https://twitter.com/mmahalwy">
+          Twitter
+        </Anchor>{' '}
+        or{' '}
+        <Anchor isExternal href="mailto:mmahalwy@gmail.com">
           email
         </Anchor>{' '}
         where you can stay up to date on upcoming content and life updates

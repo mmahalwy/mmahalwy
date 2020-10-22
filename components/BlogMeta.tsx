@@ -1,30 +1,20 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import styled from 'styled-components';
 import { NextSeo } from 'next-seo';
-import TagBlock from '../components/Tags';
-import ReadingProgress from '../components/ReadingProgress';
+import { Box, Heading, Text } from '@chakra-ui/core';
+import TagBlock from './Tags';
 import { articleSEO, createSEOConfig } from '../utils/seo';
 import { formatDisplayDate, formatSEODate } from '../utils/formatters';
-import Text from './dls/Text';
 
-const Container = styled.div`
-  padding-bottom: 1rem;
-`;
+type BlogMetaProps = {
+  meta: {
+    publishDate: string;
+    title: string;
+    tags: string[];
+  };
+};
 
-// remove the extension from the file name to make a component name string
-// const cleaned_name = name.split('.')[0];
-
-// format dates for SEO, but preserve publishDate as the latter is
-// displayed on the blog post. Currently not displaying modifiedDate, but
-// preserving it for possible future use.
-// const formattedPublishDate = formatSEODate(publishDate);
-
-// const formattedModifiedDate = formatSEODate(modifiedDate, true);
-
-// // This is used to sort pages/posts
-// const secondsSinceEpoch = getSecondsSinceEpoch(formattedPublishDate);
-
-const BlogMeta = ({ meta }) => {
+const BlogMeta = ({ meta }: BlogMetaProps) => {
   if (!meta) {
     console.error('meta not found!');
     return <>Not found</>;
@@ -33,16 +23,17 @@ const BlogMeta = ({ meta }) => {
   const formattedPublishDate = formatSEODate(meta.publishDate);
 
   return (
-    <Container>
-      {meta.hideProgressBar ? null : <ReadingProgress />}
+    <Box py={20} textAlign="center">
       <NextSeo {...createSEOConfig(meta)} />
-      <h1>{meta.title}</h1>
+      <Heading>{meta.title}</Heading>
       <Text>
-        <small className="post-date">{formatDisplayDate(formattedPublishDate)}</small>
+        <small className="post-date">
+          {formatDisplayDate(formattedPublishDate)}
+        </small>
       </Text>
       <TagBlock tags={meta.tags} />
       {articleSEO(meta)}
-    </Container>
+    </Box>
   );
 };
 

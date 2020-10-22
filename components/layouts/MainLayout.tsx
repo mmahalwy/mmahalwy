@@ -1,18 +1,14 @@
+import { Box } from '@chakra-ui/core';
 import React, { ReactNode } from 'react';
-import styled from 'styled-components';
 
 type MainLayoutProps = {
   children: NonNullable<ReactNode>;
 };
 
-const Container = styled.div`
-  max-width: 740px;
-  padding: 20px 20px 20px 20px;
-  position: relative;
-  margin: 0px auto;
-  width: 100%;
-`;
-
-const MainLayout = ({ children }: MainLayoutProps) => <Container>{children}</Container>;
+const MainLayout = ({ children }: MainLayoutProps) => (
+  <Box width="100%" margin="0px auto" position="relative" padding="20px" maxWidth="740px">
+    {children}
+  </Box>
+);
 
 export default MainLayout;

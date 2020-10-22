@@ -1,39 +1,57 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react/destructuring-assignment */
+import {
+  Heading,
+  Text,
+  Link,
+  Box,
+  Divider,
+  Code,
+  useColorMode,
+} from '@chakra-ui/core';
+import React from 'react';
 import BlogMeta from './BlogMeta';
 import ConvertkitForm from './ConvertkitForm';
-import { Title3, Title1, Title2, Strong } from './dls/Title';
-import Text from './dls/Text';
-import Anchor, { OutboundAnchor } from './dls/Anchor';
-import List from './dls/List';
+import Anchor from './dls/Anchor';
 import Figure from './Figure';
 import Button from './dls/Button';
-import Spacing from './dls/Spacing';
-import Code from './Code';
+
+const Hr = () => {
+  const { colorMode } = useColorMode();
+  const borderColor = {
+    light: 'gray.200',
+    dark: 'gray.600',
+  };
+
+  return <Divider borderColor={borderColor[colorMode]} my={4} w="100%" />;
+};
 
 const components = {
-  h1: Title1,
-  h2: Title2,
-  h3: Title3,
-  p: Text,
+  h1: (props) => <Heading as="h1" size="xl" my={4} {...props} />,
+  h2: (props) => <Heading as="h2" size="l" my={4} {...props} />,
+  h3: (props) => <Heading as="h3" size="m" my={4} {...props} />,
+  p: (props) => <Text as="p" mt={4} lineHeight="tall" {...props} />,
+  ul: (props) => <Box as="ul" pt={2} pl={4} ml={2} {...props} />,
+  ol: (props) => <Box as="ol" pt={2} pl={4} ml={2} {...props} />,
+  li: (props) => <Box as="li" pb={1} {...props} />,
   a: Anchor,
-  Anchor: Anchor,
-  OutboundAnchor: OutboundAnchor,
-  ul: List,
+  Anchor: Link,
+  hr: Hr,
+  OutboundAnchor: Anchor,
   inlineCode: Code,
-  BlogMeta: BlogMeta,
-  ConvertkitForm: ConvertkitForm,
-  Figure: Figure,
-  Spacing: Spacing,
-  Button: Button,
-  strong: Strong,
-  wrapper: (props) => {
-    return (
-      <>
-        <BlogMeta meta={props.meta} />
-        <main {...props} />
-        <ConvertkitForm />
-      </>
-    );
-  },
+  BlogMeta,
+  ConvertkitForm,
+  Figure,
+  Button,
+  wrapper: (props) => (
+    <>
+      <BlogMeta meta={props.meta} />
+      <main {...props} />
+      <ConvertkitForm />
+    </>
+  ),
 };
 
 export default components;
