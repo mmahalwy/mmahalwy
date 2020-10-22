@@ -41,7 +41,7 @@
     "eslint-plugin-react": "^7.21.4",
     "js-yaml": "^3.13.1",
     "js-yaml-loader": "^1.2.2",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "next": "^9.4.4",
     "next-fonts": "^0.19.0",
     "next-google-fonts": "^1.2.1",
