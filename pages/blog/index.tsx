@@ -18,8 +18,8 @@ const Blog: NextPage<any> = ({ allData = [] }) => {
 
   return (
     <>
-      {blogPosts.map((post, index) => (
-        <PostListing key={post.title} post={post} index={index} />
+      {blogPosts.map((post) => (
+        <PostListing key={post.title} post={post} />
       ))}
     </>
   );

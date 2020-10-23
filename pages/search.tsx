@@ -23,16 +23,14 @@ const Search: NextPage<any> = ({ allData = [] }) => {
 
     const items = posts
       .filter((post) => (post.tags ? post.tags.includes(tagTopic) : false))
-      .map((post, index) => (
-        <PostListing key={index} post={post} index={index} />
-      ));
+      .map((post) => <PostListing key={post.title} post={post} />);
 
     if (items.length) {
       return items;
     }
     return <h2 key="not-found-headline">No results</h2>;
   };
-  const blogPosts = allData.filter((content) => content.type == 'post');
+  const blogPosts = allData.filter((content) => content.type === 'post');
 
   return (
     <MainLayout>

@@ -177,7 +177,10 @@ const TwitterAuthButton = ({
   const { addSuccessToast } = useToasts();
 
   const handleAuth = () => {
-    const q = queryString.stringify({ source_url: window.location.origin, user_id: userId });
+    const q = queryString.stringify({
+      source_url: window.location.origin,
+      user_id: userId,
+    });
 
     authenticate({
       provider: 'twitter',
@@ -202,7 +205,12 @@ export default TwitterAuthButton;
 - authenticate method
 
 ```tsx
-export const authenticate = ({ provider, url, tab = false, cb }: AuthenticateArg) => {
+export const authenticate = ({
+  provider,
+  url,
+  tab = false,
+  cb,
+}: AuthenticateArg) => {
   let name = tab ? '_blank' : provider;
   openPopup(provider, url, name);
 
@@ -307,13 +315,21 @@ const Auth = () => {
           jwt,
           success: true,
         },
-        '*',
+        '*'
       );
       window.close();
     }
   }, []);
 
-  return <div>{jwt ? <Title1>Loading...</Title1> : <Title1>Authentication failed</Title1>}</div>;
+  return (
+    <div>
+      {jwt ? (
+        <Title1>Loading...</Title1>
+      ) : (
+        <Title1>Authentication failed</Title1>
+      )}
+    </div>
+  );
 };
 
 export default Auth;
