@@ -1,4 +1,4 @@
-import { theme as chakraTheme } from '@chakra-ui/core';
+import { theme as chakraTheme } from '@chakra-ui/react';
 
 const theme = {
   ...chakraTheme,
@@ -12,9 +12,6 @@ const theme = {
     normal: 400,
     medium: 600,
     bold: 700,
-  },
-  icons: {
-    ...chakraTheme.icons,
   },
 };
 

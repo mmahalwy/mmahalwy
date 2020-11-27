@@ -1,7 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
-import { Heading, Text } from '@chakra-ui/core';
+import { Heading, Text } from '@chakra-ui/react';
 import TagBlock from './Tags';
 import { PostDataType } from '../types/PostDataType';
 import Anchor from './dls/Anchor';
@@ -17,7 +17,7 @@ type PostListingType = {
 function PostListing({ post }: PostListingType) {
   return (
     <Container key={post.title}>
-      <Heading>
+      <Heading size="lg">
         <Anchor href={`/blog/${post.name}`}>{post.title}</Anchor>
       </Heading>
       <Text>{post.seoDescription}</Text>

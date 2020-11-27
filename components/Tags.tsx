@@ -1,5 +1,5 @@
 import React from 'react';
-import { Badge, Box } from '@chakra-ui/core';
+import { Badge, Box } from '@chakra-ui/react';
 import Anchor from './dls/Anchor';
 
 type TagBlockProps = {

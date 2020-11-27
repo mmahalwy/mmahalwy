@@ -1,10 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import App from 'next/app';
+import Head from 'next/head';
 import { DefaultSeo } from 'next-seo';
 import ReactGA from 'react-ga';
-import { Global, css } from '@emotion/core';
-import { ThemeProvider, CSSReset, useColorMode } from '@chakra-ui/core';
+import { Global, css } from '@emotion/react';
+import { ChakraProvider, useColorMode } from '@chakra-ui/react';
 import { MDXProvider } from '@mdx-js/react';
 import Navigation from '../components/Navigation';
 import { createSEOConfig } from '../utils/seo';
@@ -66,21 +67,25 @@ export default class MyApp extends App {
     const { Component, pageProps } = this.props;
 
     return (
-      <ThemeProvider theme={theme}>
-        <CSSReset />
-        <GlobalStyle />
-        <DefaultSeo {...createSEOConfig()} />
+      <>
+        <Head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </Head>
+        <ChakraProvider theme={theme}>
+          <GlobalStyle />
+          <DefaultSeo {...createSEOConfig()} />
 
-        <Navigation />
+          <Navigation />
 
-        <>
-          <MDXProvider components={MdxComponents}>
-            <MainLayout>
-              <Component {...pageProps} />
-            </MainLayout>
-          </MDXProvider>
-        </>
-      </ThemeProvider>
+          <>
+            <MDXProvider components={MdxComponents}>
+              <MainLayout>
+                <Component {...pageProps} />
+              </MainLayout>
+            </MDXProvider>
+          </>
+        </ChakraProvider>
+      </>
     );
   }
 }

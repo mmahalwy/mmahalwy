@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 
-import { Link } from '@chakra-ui/core';
+import { Link } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { OutboundLink } from 'react-ga';
 
@@ -14,7 +14,7 @@ const Anchor = (props) => {
   if (isInternalLink) {
     return (
       <NextLink href={href} passHref>
-        <Link textDecoration="underline" {...props} />
+        <Link _hover={{ textDecoration: 'underline' }} {...props} />
       </NextLink>
     );
   }

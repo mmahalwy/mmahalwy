@@ -10,7 +10,7 @@ import {
   Divider,
   Code,
   useColorMode,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 import React from 'react';
 import BlogMeta from './BlogMeta';
 import ConvertkitForm from './ConvertkitForm';
@@ -45,13 +45,14 @@ const components = {
   ConvertkitForm,
   Figure,
   Button,
-  wrapper: (props) => (
-    <>
-      <BlogMeta meta={props.meta} />
-      <main {...props} />
-      <ConvertkitForm />
-    </>
-  ),
+  // wrapper: (props) => (
+  //   <>
+  //     {console.log(props)}
+  //     <BlogMeta meta={props.meta} />
+  //     <main {...props} />
+  //     <ConvertkitForm />
+  //   </>
+  // ),
 };
 
 export default components;

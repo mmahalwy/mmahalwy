@@ -1,7 +1,6 @@
-// @ts-ignore
 import image from '../public/static/images/my-pic.jpg?url';
-import { darken } from 'polished';
 
+// eslint-disable-next-line import/prefer-default-export
 export const config = {
   author: 'Mohamed El Mahallawy',
   siteName: 'mmahalwy',

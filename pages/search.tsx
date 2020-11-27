@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
-import { Heading } from '@chakra-ui/core';
+import { Heading } from '@chakra-ui/react';
 import MainLayout from '../components/layouts/MainLayout';
 import PostListing from '../components/PostListing';
 import BlogEngine from '../utils/blog-engine';

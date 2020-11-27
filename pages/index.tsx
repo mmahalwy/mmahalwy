@@ -2,10 +2,24 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { NextSeo } from 'next-seo';
-import { Heading, Text } from '@chakra-ui/core';
+import {
+  Heading,
+  Text,
+  UnorderedList,
+  ListItem,
+  ListIcon,
+  List,
+} from '@chakra-ui/react';
+import Image from 'next/image';
+import styled from '@emotion/styled';
+
 import { createSEOConfig } from '../utils/seo';
-import { config } from '../config';
 import Anchor from '../components/dls/Anchor';
+
+const DisplayImage = styled(Image)`
+  border-radius: 50%;
+  margin-bottom: 16px;
+`;
 
 export const meta = {
   title: "Mo's website",
@@ -20,15 +34,15 @@ const Index = () => {
   return (
     <div>
       <NextSeo {...createSEOConfig()} />
-      <img
-        src={config.websiteLogo}
+      <DisplayImage
+        src="/static/images/me.jpg"
         alt="mmahalwy"
         width={32}
         height={32}
-        style={{ borderRadius: '50%', marginBottom: 16 }}
+        objectFit="cover"
       />
       <Heading mb={4}>Hi, I'm Mo</Heading>
-      <Text>
+      <Text mb={4}>
         I am a software engineer at{' '}
         <Anchor href="https://airbnb.com" target="_blank">
           Airbnb
@@ -53,7 +67,7 @@ const Index = () => {
         </Anchor>{' '}
         without the need to code deployment!
       </Text>
-      <Text>
+      <Text mb={4}>
         <strong>On my free time,</strong> I enjoy playing{' '}
         <Anchor
           href="https://www.sfsfl.com/LibLeague/Team/Team.php?PARAM_SEASON_CODE=2019+PARAM_TEAM_CODE=BELO"
@@ -63,11 +77,53 @@ const Index = () => {
         </Anchor>
         , eating out, hanging out with friends and working on side projects.
       </Text>
-      <Text>
+      <Text mb={4}>
         <strong>
-          <Anchor href="mailto:mmahalwy@gmail.com">Talk to me</Anchor>
-        </strong>{' '}
-        about 📈investing, 🏠real estate, 🖥tech and 🇨🇦Canada!
+          <Anchor href="mailto:mmahalwy@gmail.com">Talk to me about:</Anchor>
+        </strong>
+
+        <List>
+          <ListItem>
+            <ListIcon
+              as={() => (
+                <span role="img" aria-label="emoji" style={{ marginRight: 4 }}>
+                  📈
+                </span>
+              )}
+            />
+            investing
+          </ListItem>
+          <ListItem>
+            <ListIcon
+              as={() => (
+                <span role="img" aria-label="emoji" style={{ marginRight: 4 }}>
+                  🏠
+                </span>
+              )}
+            />
+            real estate
+          </ListItem>
+          <ListItem>
+            <ListIcon
+              as={() => (
+                <span role="img" aria-label="emoji" style={{ marginRight: 4 }}>
+                  🖥
+                </span>
+              )}
+            />
+            tech
+          </ListItem>
+          <ListItem>
+            <ListIcon
+              as={() => (
+                <span role="img" aria-label="emoji" style={{ marginRight: 4 }}>
+                  🇨🇦
+                </span>
+              )}
+            />
+            Canada!
+          </ListItem>
+        </List>
       </Text>
       <Text>
         <strong>I hang out</strong> on{' '}

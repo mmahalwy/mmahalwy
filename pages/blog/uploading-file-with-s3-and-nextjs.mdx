@@ -1,0 +1,62 @@
+import { TAGS } from '../../utils/constants';
+
+export const meta = {
+  title: 'Uploading a file with S3 and NextJs',
+  tags: [TAGS.ENGINEERING],
+  layout: 'post',
+  publishDate: '2020-11-27',
+  modifiedDate: false,
+  seoDescription: 'Quick guide to uploading a file with S3 and Nextjs',
+  exclude: false,
+  images: [],
+};
+
+I been digging around the internet for this solution and thought I'd share it.
+
+```tsx
+import { NextApiRequest, NextApiResponse } from 'next';
+
+import aws from 'aws-sdk';
+import multer from 'multer';
+import multerS3 from 'multer-s3';
+
+const spacesEndpoint = new aws.Endpoint('nyc3.digitaloceanspaces.com');
+const s3 = new aws.S3({
+  endpoint: spacesEndpoint,
+});
+
+const upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: 'your-bucket-here',
+    acl: 'public-read',
+    key: function (request, file, cb) {
+      cb(null, file.originalname);
+    },
+  }),
+}).single('file');
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
+export default (req: NextApiRequest, res: NextApiResponse) => {
+  return new Promise((resolve, reject) =>
+    // @ts-ignore
+    upload(req, res, function (error: any, ...other) {
+      if (error) {
+        console.log(error);
+        res.json({ error });
+        return reject();
+      }
+
+      console.log('File uploaded successfully.');
+      // @ts-ignore
+      res.json({ success: true, file: true, ...req.file });
+      return resolve();
+    })
+  );
+};
+```

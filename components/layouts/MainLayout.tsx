@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/core';
+import { Box } from '@chakra-ui/react';
 import React, { ReactNode } from 'react';
 
 type MainLayoutProps = {
@@ -6,7 +6,13 @@ type MainLayoutProps = {
 };
 
 const MainLayout = ({ children }: MainLayoutProps) => (
-  <Box width="100%" margin="0px auto" position="relative" padding="20px" maxWidth="740px">
+  <Box
+    width="100%"
+    margin="0px auto"
+    position="relative"
+    padding="20px"
+    maxWidth="740px"
+  >
     {children}
   </Box>
 );

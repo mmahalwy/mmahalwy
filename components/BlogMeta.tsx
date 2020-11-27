@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { NextSeo } from 'next-seo';
-import { Box, Heading, Text } from '@chakra-ui/core';
+import { Box, Heading, Text } from '@chakra-ui/react';
 import TagBlock from './Tags';
 import { articleSEO, createSEOConfig } from '../utils/seo';
 import { formatDisplayDate, formatSEODate } from '../utils/formatters';
