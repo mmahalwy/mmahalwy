@@ -3,10 +3,10 @@ import styled from '@emotion/styled';
 import { config } from '../config';
 
 const Container = styled.footer`
-  background: ${(props) => props.theme.black};
+  background: #000;
   height: 80px;
   width: 100%;
-  border-top: 2px solid ${(props) => props.theme.lightGray};
+  border-top: 2px solid #f7f7f7;
   display: flex;
   justify-content: center;
   align-items: center;
