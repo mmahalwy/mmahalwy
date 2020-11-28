@@ -1,4 +1,4 @@
-import image from '../public/static/images/my-pic.jpg?url';
+import image from '../public/static/images/me.jpg';
 
 // eslint-disable-next-line import/prefer-default-export
 export const config = {
