@@ -16,7 +16,6 @@ import BlogMeta from './BlogMeta';
 import ConvertkitForm from './ConvertkitForm';
 import Anchor from './dls/Anchor';
 import Figure from './Figure';
-import Button from './dls/Button';
 
 const Hr = () => {
   const { colorMode } = useColorMode();
@@ -44,7 +43,6 @@ const components = {
   BlogMeta,
   ConvertkitForm,
   Figure,
-  Button,
   // wrapper: (props) => (
   //   <>
   //     {console.log(props)}
