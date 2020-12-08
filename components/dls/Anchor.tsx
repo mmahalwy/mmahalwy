@@ -20,7 +20,13 @@ const Anchor = (props) => {
   }
 
   return (
-    <Link as={OutboundLink} textDecoration="underline" isExternal {...props} />
+    <Link
+      as={OutboundLink}
+      to={href}
+      textDecoration="underline"
+      isExternal
+      {...props}
+    />
   );
 };
 
