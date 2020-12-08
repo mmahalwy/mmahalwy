@@ -10,7 +10,7 @@ const Item = styled.li`
   height: 40px;
   padding: 0px 16px;
 
-  &:first-child {
+  &:first-of-type {
     padding-left: 0px;
   }
 `;
