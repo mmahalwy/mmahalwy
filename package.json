@@ -10,7 +10,8 @@
     "start": "NODE_ENV=production next start",
     "clean": "rm -rf .next ; npm ci ; NODE_ENV=development npm run dev",
     "test": "jest",
-    "lint": "eslint pages --fix"
+    "lint": "eslint pages --fix",
+    "generate-sitemap": "node ./sitemap-generator.js"
   },
   "keywords": [
     "next.js",
