@@ -18,7 +18,7 @@ function PostListing({ post }: PostListingType) {
   return (
     <Container key={post.title}>
       <Heading size="lg">
-        <Anchor href={`/blog/${post.name}`}>{post.title}</Anchor>
+        <Anchor href={`/blog/${post.slug}`}>{post.title}</Anchor>
       </Heading>
       <Text>{post.seoDescription}</Text>
       <Text fontSize={12}>{post.publishDate}</Text>

@@ -1,34 +1,29 @@
 import React from 'react';
 import { NextPage } from 'next';
 import PostListing from '../../components/PostListing';
-import BlogEngine from '../../utils/blog-engine';
+import { getAllFilesFrontMatter } from '../../utils/mdx';
 
-export const meta = {
-  title: 'Blog',
-  tags: [],
-  layout: 'blog-post-list',
-  description: 'Blog',
-  publishDate: '',
-  modifiedDate: false,
-  seoDescription: 'Blog',
-};
-
-const Blog: NextPage<any> = ({ allData = [] }) => {
-  const blogPosts = allData.filter((content) => content.type === 'post');
+const Blog: NextPage<any> = ({ posts = [] }) => {
+  const allPosts = posts
+    .sort(
+      (a, b) =>
+        Number(new Date(b.publishDate)) - Number(new Date(a.publishDate))
+    )
+    .filter((p) => !p.exclude);
 
   return (
     <>
-      {blogPosts.map((post) => (
+      {allPosts.map((post) => (
         <PostListing key={post.title} post={post} />
       ))}
     </>
   );
 };
 
-export const getStaticProps = async () => {
-  const allData = BlogEngine();
+export async function getStaticProps() {
+  const posts = await getAllFilesFrontMatter('blog');
 
-  return { props: { allData } };
-};
+  return { props: { posts } };
+}
 
 export default Blog;

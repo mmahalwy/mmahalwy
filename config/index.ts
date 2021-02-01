@@ -13,12 +13,16 @@ export const config = {
   twitterCardType: "mmahalwy's blog",
   navigation: [
     {
-      text: 'Home',
+      text: 'Mo',
       link: '/',
     },
     {
       text: 'Blog',
       link: '/blog',
+    },
+    {
+      text: 'Startup ideas',
+      link: '/blog/startup-problems',
     },
   ],
   css: {

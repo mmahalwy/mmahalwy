@@ -7,7 +7,7 @@ const markdownImport = (type = "post") =>
     } components/BlogMeta";`;
 /* prettier-ignore */
 const mardownContent = () =>
-`export const meta = {
+`---
     title: "MDX Page",
     // the first tag below will be used in <meta property="article:tag" content="first-tag" />
     tags: [],
@@ -26,7 +26,7 @@ No need to add a title, as it is in the \`meta\` data above and will auto-magica
 The \`exclude\` can be excluded (ha!) unless you want this post to be excluded from the post list on the \`/blog\` page.`;
 /* prettier-ignore */
 const reactContent = () =>
-`export const meta = {
+`---
     title: "JavaScript Page",
     // The tags are used for SEO in the header property: \`<meta name="keywords" content={stringOfAllPostTags} />\`
     tags: [],

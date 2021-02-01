@@ -1,19 +1,10 @@
-import { TAGS } from '../../utils/constants';
-
-export const meta = {
-  title: 'Why I built my own blog',
-  tags: [TAGS.BLOGGING],
-  layout: 'post',
-  publishDate: '2020-01-03',
-  modifiedDate: false,
-  seoDescription: 'A little about the process',
-  exclude: false,
-  images: [
-    {
-      url: '/static/images/notion-api.jpeg',
-    },
-  ],
-};
+---
+title: 'Why I built my own blog'
+publishDate: '2020-01-03'
+seoDescription: 'A little about the process'
+exclude: false
+url: '/static/images/notion-api.jpeg'
+---
 
 For some time now, I been longing to start writing and blogging again.
 I previously wrote on Medium quite a bit and was an avid consumer of content on
@@ -34,7 +25,11 @@ tracking and other social features such as a signup form.
 They don't currently have a public API but I figured I can reverse engineer their existing on to use. Well...
 it's not that easy after all 🙃
 
-<Figure src="/static/images/notion-api.jpeg" alt="notion api" caption="Notion's API" />
+<Figure
+  src="/static/images/notion-api.jpeg"
+  alt="notion api"
+  caption="Notion's API"
+/>
 
 As you can see, the API is pretty cryptic and hard to understand. So, I decided to give up on that. Maybe
 at a later date when they release their offial API, I will move my blog to be powered by them.

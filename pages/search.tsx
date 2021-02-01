@@ -6,7 +6,7 @@ import MainLayout from '../components/layouts/MainLayout';
 import PostListing from '../components/PostListing';
 import BlogEngine from '../utils/blog-engine';
 
-export const meta = {
+---
   title: 'Search',
   tags: ['javascript', 'python'],
   layout: 'page',

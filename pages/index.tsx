@@ -2,14 +2,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { NextSeo } from 'next-seo';
-import {
-  Heading,
-  Text,
-  UnorderedList,
-  ListItem,
-  ListIcon,
-  List,
-} from '@chakra-ui/react';
+import { Heading, Text, ListItem, ListIcon, List } from '@chakra-ui/react';
 import Image from 'next/image';
 import styled from '@emotion/styled';
 
@@ -20,15 +13,6 @@ const DisplayImage = styled(Image)`
   border-radius: 50%;
   margin-bottom: 16px;
 `;
-
-export const meta = {
-  title: "Mo's website",
-  tags: [],
-  layout: 'post',
-  publishDate: '',
-  modifiedDate: false,
-  seoDescription: 'Welcome to my site!',
-};
 
 const Index = () => {
   return (

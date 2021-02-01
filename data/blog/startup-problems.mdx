@@ -1,0 +1,22 @@
+---
+title: 'Startup problems'
+publishDate: '2021-01-29'
+seoDescription: 'Problems and ideas for startups'
+exclude: false
+---
+
+As I have started to build my startup, I ran into a few problems that I _really wish_ were solved or there are solutions for these. By no means have I went to turn every rock to see if there is a solution for my problems (although I do extensive research). This is an ongoing list I will update regularly. Feel free to reach out if you want to learn more.
+
+---
+
+### Email rendering, testing
+
+- Rails ActionMailer and HTML is great to start, and [letter_opener gem](https://github.com/ryanb/letter_opener) makes it easy to test on dev
+- VERY hard to test on dev once you don't render HTML in source code (Sengrid)
+- VERY hard to create beautiful emails and render to HTML string via API (makes it easier to generate, then send off to provider of choice)
+
+### Managing files
+
+- [Flatfile.io](https://flatfile.io) is very cool for uploading CSVs. [Filestack](https://www.filestack.com/), [Uploadcare](https://uploadcare.com/) and many are great for uploading files, images, videos, etc. [Docspring](https://docspring.com/) is very neat for filling out PDFs via API
+- But it's still hard to generate files for a user output. For example, we have to generate a PDF for our end user. My hack is to build it in React on Nextjs, then server-side render for my Rails app which then will upload to cloud, save cdn url to DB, etc.
+- Another is I now have to zip a few files together (call them from CDN, then zip them) and it's been painful to learn about [`Tempfile`](https://ruby-doc.org/stdlib-2.4.0/libdoc/tempfile/rdoc/Tempfile.html), and more in Ruby land

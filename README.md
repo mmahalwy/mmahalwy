@@ -99,7 +99,7 @@ This component should be added to each blog post after the `meta` export. Make s
 
 ```
 import BlogMeta from "../../components/BlogMeta";
-export const meta = {
+---
     title: "Third Post With Image",
     tags: ["mdx", "javascript"],
     layout: "post",

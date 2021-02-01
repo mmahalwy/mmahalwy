@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const meta = {
+---
   title: 'About',
   tags: ['Next.js', 'MDX'],
   layout: 'page',

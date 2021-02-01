@@ -28,12 +28,7 @@ type DataType = {
   title?: string;
   seoDescription?: string;
   canonicalUrl?: string;
-  images?: Array<{
-    url: string;
-    width?: number;
-    height?: number;
-    alt?: string;
-  }>;
+  url?: string;
 };
 
 export function createSEOConfig(data: DataType = {}): NextSeoProps {
@@ -51,14 +46,16 @@ export function createSEOConfig(data: DataType = {}): NextSeoProps {
       url: data.canonicalUrl,
       title,
       description,
-      images: data.images ?? [
-        {
-          url: config.websiteLogo,
-          width: 280,
-          height: 280,
-          alt: 'mmahalwy',
-        },
-      ],
+      images: data.url
+        ? [{ url: data.url, width: 600, height: 300 }]
+        : [
+            {
+              url: config.websiteLogo,
+              width: 280,
+              height: 280,
+              alt: 'mmahalwy',
+            },
+          ],
       site_name: config.siteName,
     },
     twitter: {
