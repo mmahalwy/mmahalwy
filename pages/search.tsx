@@ -4,16 +4,6 @@ import { NextPage } from 'next';
 import { Heading } from '@chakra-ui/react';
 import MainLayout from '../components/layouts/MainLayout';
 import PostListing from '../components/PostListing';
-import BlogEngine from '../utils/blog-engine';
-
----
-  title: 'Search',
-  tags: ['javascript', 'python'],
-  layout: 'page',
-  publishDate: '2011-01-01',
-  modifiedDate: false,
-  seoDescription: 'This page lists all posts with a given tag.',
-};
 
 const Search: NextPage<any> = ({ allData = [] }) => {
   const router = useRouter();
@@ -41,9 +31,7 @@ const Search: NextPage<any> = ({ allData = [] }) => {
 };
 
 export const getStaticProps = async () => {
-  const allData = BlogEngine();
-
-  return { props: { allData } };
+  return { props: { allData: [] } };
 };
 
 export default Search;
