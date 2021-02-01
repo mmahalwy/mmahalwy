@@ -1,12 +1,11 @@
 import hydrate from 'next-mdx-remote/hydrate';
-import { MdxRemote } from 'next-mdx-remote/types';
 import React from 'react';
 import BlogLayout from '../../components/layouts/BlogLayout';
 import MdxComponents from '../../components/MdxComponents';
 import { getFiles, getFileBySlug } from '../../utils/mdx';
 
 type BlogProps = {
-  mdxSource: MdxRemote.Source;
+  mdxSource: any;
   frontMatter: any;
 };
 
