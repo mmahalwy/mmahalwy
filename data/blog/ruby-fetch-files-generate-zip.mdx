@@ -1,0 +1,69 @@
+---
+title: 'Fetching files and generate zip file'
+publishDate: '2021-01-31'
+seoDescription: 'How to fetch files from CDN and generate a zip file in Ruby'
+exclude: false
+---
+
+In a recent project, written in Ruby on Rails, I wanted to fetch files from a CDN and zip them for a user to download. I thought I'd share it here for future folks:
+
+```ruby
+
+def generate_zip
+  filename = "filename.zip"
+  temp_file = Tempfile.new(filename)
+  files_to_zip = []
+  # This is the tricky part
+  # Initialize the temp file as a zip file
+  Zip::OutputStream.open(temp_file) { |zos| }
+
+  # Add files to the zip file as usual
+  Zip::File.open(temp_file.path, Zip::File::CREATE) do |_zip|
+    file_urls.each do |file_url|
+      file_to_zip = get_document_for_zip(file_url)
+      files_to_zip << file_to_zip
+      _zip.add('some file name', file_to_zip)
+    end
+  end
+
+  # Read the binary data from the file
+  zip_data = File.open(temp_file.path)
+
+  # Send the data to the browser as an attachment
+  # We do not send the file directly because it will
+  # get deleted before rails actually starts sending it
+
+  zip_data
+rescue StandardError => e
+  # do something
+ensure
+  temp_file.close
+  temp_file.unlink
+  files_to_zip.each do |file_to_zip|
+    file_to_zip.close
+    file_to_zip.unlink
+  end
+end
+
+
+def get_document_for_zip(file_url)
+  file_to_zip = Tempfile.new('some file name')
+  file_to_zip.binmode
+  file_to_zip.write(HTTParty.get(file_url))
+  file_to_zip.flush
+  file_to_zip
+end
+```
+
+Then in your controller
+
+```ruby
+def export
+respond_to do |format|
+  format.zip do
+          send_data generate_zip, filename: "filename.zip", type: "application/zip"
+  end
+end
+```
+
+That should do the trick!
