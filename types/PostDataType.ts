@@ -5,6 +5,7 @@ export type PostDataType = {
   title: string;
   tags: string[];
   layout: string;
+  slug: string;
   publishDate: string;
   formattedPublishDate: string;
   modifiedDate: string;

@@ -1,10 +1,16 @@
 import hydrate from 'next-mdx-remote/hydrate';
+import { MdxRemote } from 'next-mdx-remote/types';
 import React from 'react';
 import BlogLayout from '../../components/layouts/BlogLayout';
 import MdxComponents from '../../components/MdxComponents';
 import { getFiles, getFileBySlug } from '../../utils/mdx';
 
-export default function Blog({ mdxSource, frontMatter }) {
+type BlogProps = {
+  mdxSource: MdxRemote.Source;
+  frontMatter: any;
+};
+
+export default function Blog({ mdxSource, frontMatter }: BlogProps) {
   const content = hydrate(mdxSource, {
     components: MdxComponents,
   });
