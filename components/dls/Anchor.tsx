@@ -14,7 +14,7 @@ const Anchor = (props) => {
   if (isInternalLink) {
     return (
       <NextLink href={href} passHref>
-        <Link _hover={{ textDecoration: 'underline' }} {...props} />
+        <Link textDecoration="underline" {...props} />
       </NextLink>
     );
   }

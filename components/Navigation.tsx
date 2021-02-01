@@ -1,45 +1,30 @@
 import React from 'react';
-import styled from '@emotion/styled';
-import { config } from '../config';
+import { Box, Flex, Heading, HStack, Spacer } from '@chakra-ui/react';
+import Link from 'next/link';
 import MainLayout from './layouts/MainLayout';
 import Anchor from './dls/Anchor';
 
-const Item = styled.li`
-  display: inline-block;
-  list-style-type: none;
-  height: 40px;
-  padding: 0px 16px;
-
-  &:first-of-type {
-    padding-left: 0px;
-  }
-`;
-
-type NavigationItemProps = {
-  data: {
-    link: string;
-    text: string;
-  };
-};
-
-export const NavigationItem = ({ data }: NavigationItemProps) => (
-  <Item>
-    <Anchor href={data.link}>{data.text}</Anchor>
-  </Item>
-);
-
 const Navigation = () => (
   <MainLayout>
-    <ul>
-      {config.navigation.map((navData) => {
-        return <NavigationItem key={navData.link} data={navData} />;
-      })}
-    </ul>
-    <style jsx>{`
-      ul {
-        padding: 0;
-      }
-    `}</style>
+    <Flex>
+      <Box>
+        <Heading size="md">
+          <Link href="/">Mo</Link>
+        </Heading>
+      </Box>
+      <Spacer />
+      <HStack spacing="4">
+        <Anchor textDecoration="none" href="/blog">
+          Blog
+        </Anchor>
+        <Anchor textDecoration="none" href="/blog/startup-problems">
+          Startup ideas
+        </Anchor>
+        <Anchor textDecoration="none" href="https://twitter.com/mmahalwy">
+          Twitter
+        </Anchor>
+      </HStack>
+    </Flex>
   </MainLayout>
 );
 

@@ -27,7 +27,9 @@ const Index = () => {
       />
       <Heading mb={4}>Hi, I'm Mo</Heading>
       <Text mb={4}>
-        I am a software engineer at{' '}
+        I am a cofounder of an{' '}
+        <Anchor href="https://withshepherd.com">insurtech startup</Anchor>.
+        Previously, I was a software engineer at{' '}
         <Anchor href="https://airbnb.com" target="_blank">
           Airbnb
         </Anchor>
