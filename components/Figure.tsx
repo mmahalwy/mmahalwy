@@ -20,7 +20,7 @@ type FigureProps = {
   caption?: string;
 };
 
-const Figure = ({ src, alt, caption }: FigureProps) => (
+const Figure = ({ src, alt, caption = '' }: FigureProps) => (
   <Container>
     <Image src={src} alt={alt} />
     {caption && <Caption>{caption}</Caption>}
