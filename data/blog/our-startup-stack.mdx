@@ -1,0 +1,252 @@
+---
+title: 'Our startup stack'
+publishDate: '2021-02-12'
+seoDescription: 'What we use, what our tech looks like and more'
+exclude: false
+url: '/static/images/our-start-stack.jpg'
+---
+
+Today's founder session in YC was sharing our startup stack and our tech stack. I thought I'd share ours more publically.
+
+## Startup stack
+
+- Banking: [Brex](https://brex.com)
+- Shares and certificate management: [Carta](https://carta.com)
+- Product management: [Linear.app](https://linear.app)
+- Data management: [Airtable](https://airtable.com)
+- Design: [Figma](https://figma.com)
+- Documents: [Notion](https://notion.so)
+- Communication: [Slack](https://slack.com)
+- Email: [Google](https://google.com) and [Superhuman](https://superhuman.com)
+- Calendar: [Calendly](https://calendly.com)
+- Music: [Spotify](https://spotify.com)
+- Code editor: [VS Code](https://vscode.com)
+- Asset management: [Filestack](https://filestack.com) and [Uploadcare](https://uploadcare.com)
+- Mass emails: [Sendgrid](https://sendgrid.com)
+
+## Tech stack
+
+- Frontend deployment and hosting: [Vercel/Nextjs](https://vercel.com)
+- Frontend stack: [Nextjs](https://nextjs.com)
+- API deployment: [Heroku](https://heroku.com)
+- API stack: Nodejs, Koa, Sequelize ORM, GraphQL
+- Error tracking: [Sentry](https://sentry.com)
+
+## package.jsons
+
+#### Frontend
+
+```json
+{
+  "dependencies": {
+    "@ant-design/icons": "^4.4.0",
+    "@apollo/client": "^3.3.7",
+    "@sentry/browser": "^6.0.4",
+    "@sentry/integrations": "^6.0.4",
+    "@sentry/node": "^6.0.4",
+    "@sentry/tracing": "^6.0.4",
+    "@sentry/webpack-plugin": "^1.14.0",
+    "@types/lodash": "^4.14.165",
+    "@types/next-seo": "^2.1.2",
+    "@types/node": "^14.14.11",
+    "@types/randomcolor": "^0.5.5",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/validator": "^13.1.3",
+    "@uploadcare/react-widget": "^1.3.4",
+    "@uploadcare/upload-client": "^1.1.2",
+    "@zeit/next-less": "^1.0.1",
+    "@zeit/next-sass": "^1.0.1",
+    "@zeit/next-source-maps": "0.0.4-canary.1",
+    "airtable": "^0.10.1",
+    "antd": "^4.9.2",
+    "apollo-link-sentry": "^2.0.1",
+    "babel-plugin-import": "^1.13.3",
+    "caniuse-lite": "^1.0.30001180",
+    "codemirror": "^5.58.3",
+    "console": "^0.7.2",
+    "cross-fetch": "^3.0.6",
+    "dayjs": "^1.10.3",
+    "filestack-js": "^3.21.1",
+    "final-form": "^4.20.1",
+    "final-form-arrays": "^3.0.2",
+    "final-form-focus": "^1.1.2",
+    "framer-motion": "^2.9.5",
+    "graphql": "^15.4.0",
+    "hot-formula-parser": "^3.0.2",
+    "humanize-string": "^2.1.0",
+    "less": "^3.13.0",
+    "lodash": "^4.17.15",
+    "moment": "^2.29.1",
+    "next": "10.0.5",
+    "next-compose-plugins": "^2.2.0",
+    "next-fonts": "^1.0.3",
+    "next-optimized-images": "^2.6.2",
+    "next-seo": "^4.17.0",
+    "null-loader": "^4.0.1",
+    "performance-now": "^2.1.0",
+    "randomcolor": "^0.6.2",
+    "react": "17.0.1",
+    "react-cookie": "^4.0.3",
+    "react-dom": "17.0.1",
+    "react-final-form": "^6.5.2",
+    "react-final-form-arrays": "^3.1.3",
+    "react-use": "^15.3.8",
+    "responsive-loader": "^2.2.1",
+    "states-us": "^1.0.1",
+    "titleize": "^2.1.0",
+    "typescript": "^4.1.4",
+    "universal-cookie": "^4.0.4",
+    "uuid": "^8.3.2",
+    "validator": "^13.5.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@graphql-codegen/cli": "1.20.0",
+    "@graphql-codegen/fragment-matcher": "^2.0.1",
+    "@graphql-codegen/import-types-preset": "^1.18.1",
+    "@graphql-codegen/introspection": "1.18.1",
+    "@graphql-codegen/jsdoc": "^1.17.9",
+    "@graphql-codegen/named-operations-object": "^1.17.9",
+    "@graphql-codegen/near-operation-file-preset": "^1.17.13",
+    "@graphql-codegen/schema-ast": "^1.18.1",
+    "@graphql-codegen/typed-document-node": "^1.18.2",
+    "@graphql-codegen/typescript": "1.20.0",
+    "@graphql-codegen/typescript-apollo-client-helpers": "^1.1.2",
+    "@graphql-codegen/typescript-document-nodes": "^1.17.9",
+    "@graphql-codegen/typescript-operations": "1.17.13",
+    "@graphql-codegen/typescript-react-apollo": "2.2.1",
+    "@graphql-typed-document-node/core": "^3.1.0",
+    "@types/gtag.js": "^0.0.4",
+    "@typescript-eslint/eslint-plugin": "^4.14.1",
+    "@typescript-eslint/parser": "^4.14.1",
+    "babel-plugin-graphql-tag": "^3.1.0",
+    "eslint": "^7.18.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-typescript": "^12.0.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-unused-imports": "^1.0.1",
+    "graphql-codegen-apollo-next-ssr": "^1.3.0",
+    "husky": "^4.3.8",
+    "lint-staged": "^10.5.3",
+    "prettier": "^2.2.1"
+  }
+}
+```
+
+#### Backend
+
+```json
+{
+  "dependencies": {
+    "@apollo/client": "^3.3.7",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-proposal-decorators": "^7.12.12",
+    "@koa/cors": "^3.0.0",
+    "@koa/router": "^10.0.0",
+    "@sendgrid/mail": "^7.4.2",
+    "@sentry/integrations": "^6.0.4",
+    "@sentry/node": "^6.1.0",
+    "@sentry/tracing": "^6.1.0",
+    "@types/cookie": "^0.3.3",
+    "@types/faker": "^5.1.6",
+    "@types/graphql-iso-date": "^3.4.0",
+    "@types/ioredis": "^4.14.9",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/koa-logger": "^3.1.1",
+    "@types/koa-redis": "^4.0.0",
+    "@types/koa-session": "^5.10.1",
+    "@types/koa__router": "^8.0.2",
+    "@types/lodash": "^4.14.165",
+    "@types/node": "^14.14.25",
+    "@types/randomcolor": "^0.5.5",
+    "@types/uuid": "^8.3.0",
+    "@types/validator": "^13.1.3",
+    "@uploadcare/upload-client": "^1.1.2",
+    "@vjpr/babel-plugin-parameter-decorator": "^1.0.15",
+    "airtable": "^0.10.1",
+    "apollo-log": "^1.0.1",
+    "apollo-server": "^2.19.2",
+    "apollo-server-koa": "^2.14.2",
+    "apollo-server-micro": "^2.19.2",
+    "arg": "^5.0.0",
+    "babel-plugin-import": "^1.13.3",
+    "babel-plugin-transform-typescript-metadata": "^0.3.1",
+    "body-parser": "^1.19.0",
+    "class-validator": "^0.13.1",
+    "cookie": "^0.4.0",
+    "cors": "^2.8.5",
+    "dayjs": "^1.10.3",
+    "deep-diff": "^1.0.2",
+    "dotenv": "^8.2.0",
+    "exceljs": "^4.2.0",
+    "faker": "^5.3.1",
+    "filestack-js": "^3.21.1",
+    "graphql": "^15.4.0",
+    "graphql-iso-date": "^3.6.1",
+    "graphql-type-json": "^0.3.2",
+    "humanize-string": "^2.1.0",
+    "ioredis": "^4.14.1",
+    "jsonwebtoken": "^8.5.1",
+    "jszip": "^3.6.0-0",
+    "koa": "^2.10.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-jwt": "^4.0.0",
+    "koa-logger": "^3.2.1",
+    "koa-redis": "^4.0.0",
+    "koa-router": "^7.4.0",
+    "koa-session": "^5.12.3",
+    "lodash": "^4.17.15",
+    "moment": "^2.29.1",
+    "node-dev": "^4.0.0",
+    "node-fetch": "^2.6.1",
+    "object-hash": "^2.1.1",
+    "otplib": "^12.0.1",
+    "pdf-puppeteer": "^1.1.10",
+    "pdfmake": "^0.1.70",
+    "performance-now": "^2.1.0",
+    "pg": "^8.5.1",
+    "qs": "^6.9.6",
+    "randomcolor": "^0.6.2",
+    "reflect-metadata": "^0.1.13",
+    "sequelize": "^6.5.0",
+    "sequelize-cli": "^6.2.0",
+    "sequelize-mig": "^2.6.0",
+    "sequelize-typescript": "^2.0.0",
+    "sql-highlight": "^3.3.2",
+    "titleize": "^2.1.0",
+    "ts-node": "^9.1.1",
+    "type-graphql": "^1.1.1",
+    "typedi": "^0.7.3",
+    "typescript": "^4.1.2",
+    "uuid": "^8.3.2",
+    "validator": "^13.5.2",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@typescript-eslint/eslint-plugin": "^4.14.1",
+    "@typescript-eslint/parser": "^4.14.1",
+    "babel-plugin-graphql-tag": "^3.1.0",
+    "eslint": "^7.18.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-typescript": "^12.0.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-unused-imports": "^1.0.1",
+    "husky": "^4.3.8",
+    "lint-staged": "^10.5.3",
+    "prettier": "^2.2.1",
+    "ts-node-dev": "^1.1.1"
+  }
+}
+```
