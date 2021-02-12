@@ -11,6 +11,12 @@ type BlogMetaProps = {
     publishDate: string;
     title: string;
     tags: string[];
+    readingTime: {
+      text: string;
+      minutes: number;
+      time: number;
+      words: number;
+    };
   };
 };
 
@@ -28,7 +34,7 @@ const BlogMeta = ({ meta }: BlogMetaProps) => {
       <Heading>{meta.title}</Heading>
       <Text>
         <small className="post-date">
-          {formatDisplayDate(formattedPublishDate)}
+          {formatDisplayDate(formattedPublishDate)} • {meta.readingTime.text}
         </small>
       </Text>
       <TagBlock tags={meta.tags} />
