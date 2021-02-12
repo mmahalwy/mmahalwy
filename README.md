@@ -137,7 +137,7 @@ For more information, refer to the `react-anchor-link-smooth-scroll` [docs](http
 To use an image in an MDX file, import the image like this:
 
 ```
-import imageUrl from "../../public/static/images/mountains.jpg";
+import imageUrl from "../../public/images/mountains.jpg";
 ```
 
 Then use the image like this:
@@ -170,12 +170,12 @@ These icons are displayed if a user desides to save your blog to their homescree
 
 To load custom fonts, follow these two steps:
 
-- Add the font files to `/static/fonts`
+- Add the font files to `/fonts`
 - Add font face CSS rules to `/styles/index.js`
 
 Keep in mind custom fonts affect your site's performance, so use be careful with your CSS `font-display` property. This project uses `font-display: auto;` to help make font loading more performant.
 
-If you do not want to use custom fonts, delete the files from `/static/fonts`, and remove both (1) the `@font-face` rules and (2) the `font-family: "Abril Fatface"` reference from `/styles/index.js`.
+If you do not want to use custom fonts, delete the files from `/fonts`, and remove both (1) the `@font-face` rules and (2) the `font-family: "Abril Fatface"` reference from `/styles/index.js`.
 
 ## Precaching Files for Offline Use
 

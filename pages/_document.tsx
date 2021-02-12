@@ -10,7 +10,7 @@ export default class MyDocument extends Document {
       <Html lang="en">
         {/* <GoogleFonts href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" /> */}
         <Head>
-          <link rel="icon" href="/static/icons/favicon.ico" />
+          <link rel="icon" href="/icons/favicon.ico" />
           <meta
             name="google-site-verification"
             content="t97GlICC8lT0XaJq1nl7jUbKQuUZptIoQ9WBrMavRCs"
@@ -22,20 +22,20 @@ export default class MyDocument extends Document {
             rel="icon"
             type="image/png"
             sizes="16x16"
-            href="/static/icons/favicon-16x16.png"
+            href="/icons/favicon-16x16.png"
           />
           <link
             rel="icon"
             type="image/png"
             sizes="32x32"
-            href="/static/icons/favicon-32x32.png"
+            href="/icons/favicon-32x32.png"
           />
 
           <meta name="apple-mobile-web-app-title" content={config.siteName} />
           <link
             rel="apple-touch-icon"
             sizes="152x152"
-            href="/static/icons/apple-touch-icon.png"
+            href="/icons/apple-touch-icon.png"
           />
 
           <meta
@@ -44,7 +44,7 @@ export default class MyDocument extends Document {
           />
           <meta
             name="msapplication-TileImage"
-            content="/static/icons/favicon-32x32.png"
+            content="/icons/favicon-32x32.png"
           />
           {/* <link
             rel="stylesheet"

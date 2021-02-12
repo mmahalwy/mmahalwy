@@ -1,4 +1,4 @@
-import image from '../public/static/images/me.jpg';
+import image from '../public/images/me.jpg';
 
 // eslint-disable-next-line import/prefer-default-export
 export const config = {
@@ -11,7 +11,7 @@ export const config = {
   websiteLogo: image,
   twitterHandle: '@mmahalwy',
   twitterCardType: "mmahalwy's blog",
-  
+
   css: {
     primaryColor: '#111',
     accentColor: '#455A64',

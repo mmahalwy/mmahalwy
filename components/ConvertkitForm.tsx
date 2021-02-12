@@ -29,7 +29,7 @@ const ConvertkitForm = () => {
         where you can stay up to date on upcoming content and life updates
       </Text>
       <DisplayImage
-        src="/static/images/me.jpg"
+        src="/images/me.jpg"
         width="50px"
         height="50px"
         alt="alt"
