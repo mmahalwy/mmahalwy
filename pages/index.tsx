@@ -2,29 +2,16 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { NextSeo } from 'next-seo';
-import { Heading, Text, ListItem, ListIcon, List } from '@chakra-ui/react';
-import Image from 'next/image';
-import styled from '@emotion/styled';
+import { Box, Heading, Text } from '@chakra-ui/react';
 
 import { createSEOConfig } from '../utils/seo';
 import Anchor from '../components/dls/Anchor';
 
-const DisplayImage = styled(Image)`
-  border-radius: 50%;
-  margin-bottom: 16px;
-`;
-
 const Index = () => {
   return (
-    <div>
+    <Box pt={10}>
       <NextSeo {...createSEOConfig()} />
-      <DisplayImage
-        src="/static/images/me.jpg"
-        alt="mmahalwy"
-        width={32}
-        height={32}
-        objectFit="cover"
-      />
+
       <Heading mb={4}>Hi, I'm Mo</Heading>
       <Text mb={4}>
         I am a cofounder of an{' '}
@@ -63,54 +50,7 @@ const Index = () => {
         </Anchor>
         , eating out, hanging out with friends and working on side projects.
       </Text>
-      <Text mb={4}>
-        <strong>
-          <Anchor href="mailto:mmahalwy@gmail.com">Talk to me about:</Anchor>
-        </strong>
 
-        <List>
-          <ListItem>
-            <ListIcon
-              as={() => (
-                <span role="img" aria-label="emoji" style={{ marginRight: 4 }}>
-                  📈
-                </span>
-              )}
-            />
-            investing
-          </ListItem>
-          <ListItem>
-            <ListIcon
-              as={() => (
-                <span role="img" aria-label="emoji" style={{ marginRight: 4 }}>
-                  🏠
-                </span>
-              )}
-            />
-            real estate
-          </ListItem>
-          <ListItem>
-            <ListIcon
-              as={() => (
-                <span role="img" aria-label="emoji" style={{ marginRight: 4 }}>
-                  🖥
-                </span>
-              )}
-            />
-            tech
-          </ListItem>
-          <ListItem>
-            <ListIcon
-              as={() => (
-                <span role="img" aria-label="emoji" style={{ marginRight: 4 }}>
-                  🇨🇦
-                </span>
-              )}
-            />
-            Canada!
-          </ListItem>
-        </List>
-      </Text>
       <Text>
         <strong>I hang out</strong> on{' '}
         <Anchor href="https://twitter.com/mmahalwy" target="_blank">
@@ -125,7 +65,7 @@ const Index = () => {
           Github
         </Anchor>
       </Text>
-    </div>
+    </Box>
   );
 };
 

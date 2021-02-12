@@ -17,7 +17,7 @@ const ConvertkitForm = () => {
       <Box my={4}>
         <hr />
       </Box>
-      <Text>
+      <Text py={4}>
         If you enjoyed this post, feel free to follow me on{' '}
         <Anchor isExternal href="https://twitter.com/mmahalwy">
           Twitter

@@ -29,8 +29,8 @@ const Hr = () => {
 
 const components = {
   h1: (props) => <Heading as="h1" size="xl" my={4} {...props} />,
-  h2: (props) => <Heading as="h2" size="l" my={4} {...props} />,
-  h3: (props) => <Heading as="h3" size="m" my={4} {...props} />,
+  h2: (props) => <Heading as="h2" size="lg" my={4} {...props} />,
+  h3: (props) => <Heading as="h3" size="md" my={4} {...props} />,
   p: (props) => <Text as="p" mt={4} lineHeight="tall" {...props} />,
   ul: (props) => <Box as="ul" pt={2} pl={4} ml={2} {...props} />,
   ol: (props) => <Box as="ol" pt={2} pl={4} ml={2} {...props} />,

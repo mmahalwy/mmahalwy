@@ -23,7 +23,7 @@ const BlogMeta = ({ meta }: BlogMetaProps) => {
   const formattedPublishDate = formatSEODate(meta.publishDate);
 
   return (
-    <Box py={20} textAlign="center">
+    <Box py={10}>
       <NextSeo {...createSEOConfig(meta)} />
       <Heading>{meta.title}</Heading>
       <Text>

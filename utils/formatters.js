@@ -1,12 +1,16 @@
+import dayjs from 'dayjs';
+
 export function formatSEODate(dateString, dateModified = false) {
   if (!dateString && dateModified) {
     return '';
   }
-  return dateString ? new Date(dateString).toISOString() : new Date().toISOString();
+  return dateString
+    ? new Date(dateString).toISOString()
+    : new Date().toISOString();
 }
 
 export function formatDisplayDate(dateString) {
-  return new Date(dateString).toGMTString().replace(' 00:00:00 GMT', '');
+  return dayjs(dateString).format('MMMM DD, YYYY');
 }
 
 export function getSecondsSinceEpoch(dateString) {

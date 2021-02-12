@@ -1,0 +1,172 @@
+---
+title: 'Migrating from Rails to Nodejs'
+publishDate: '2021-02-11'
+seoDescription: 'Why I did it, how it went and what I learnt'
+exclude: false
+url: '/static/images/rails-to-nodejs.jpeg'
+---
+
+Ruby was the first language I learned when I started my coding journey. Rails was the first framework. As you can understand, both have a special place in my heart, and for a long time, I held on strongly.
+I was excited to hear Airbnb was a React and Rails shop – I fit right in! After 6 years, I decided it's time to bid goodbye to my old friend (for now) and hello to the new world of Nodejs and Typescript.
+
+## Why I did it?
+
+The frontend engineering community has seen a huge shift in technologies being used in recent years. Simply put, things got better and easier. With React, writing frontend not only became joyful, but easier, safer and opened doors for complex uses (server-side rendering React for example).
+Secondly, I really underestimated the value of Typescript, but it has really taken the frontend community by storm. I forgot what writing plain Javascript was like, and would never go back. Typed is simply the best.
+Thirdly, GraphQL is the new frontier. Auto generated types from the API is the future. But what about the API itself?
+Lastly, the ecosystem has really rallied around these huge trends. Editors, such has VS Code, have transformed the way we write code. With a few key strokes and shortcuts, I have a component written, with imports automatically added, code prettied and linted. What was life like before?!
+
+With that in mind, I took for granted how easy it was, how I can easily write safe and error-free code and the speed that I have been able to execute on.
+
+Queue in Rails. Rails really leans on convention over configuration – and to it's credit, it was a revolutionary idea for it's time. You can get a blog website started and launched in 15 mins. That's amazing! No wonder many of the popular tech companies today started off as a Rails app – you can get started and going in no time at all.
+It was great, but then, I found myself forgetting how much Typescript and my editor do for me, and how I lacked these tools in a Rails world. With autoloading all files, I had no idea where variables where coming from (duh, convention!) and often found myself making spelling mistakes (not caught), calling methods that don't exist, etc. In the Rails world, this is circumvented with writing really good tests and high test coverage, things I cannot afford to do in the early stages.
+
+## Migrating away
+
+I spent 2-3 days contemplating the decision. Am I crazy? Yes! Rails is what I know and know so well! But I had to make an investment now – it only gets harder later. A few things pushed me over:
+
+1. Long term, while I can get started fast now, and work my way around the Rails challenges, I will eventually need to hire a team. Rails is a difficult choice. Secondly, I wouldn't benefit from full stack engineers (I remember at Airbnb, many frontend engineers didn't want to touch the Rails API). Meanwhile, a JS/TS world, folks can jump back and forth
+2. ORM support still sucks, but, ORMs have finally started to adopt TS (a win!)
+3. I could write files and share across frontend and backend in the same repo
+
+Credit also goes out to [@kesne](https://twitter.com/kesne) for his [awesome repo](https://github.com/kesne/HostyHosting) showing a full stack experience.
+
+**So what's my setup?**
+A picture is worth a thousand words, and a `package.json` is worth a million. Here is ours:
+
+```json
+{
+  "name": "name",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": " NODE_OPTIONS=--stack-trace-limit=100 DOTENV_CONFIG_PATH=./.env.local ts-node-dev --stack-trace-limit=100 --respawn --transpile-only -r dotenv/config -- src/index.ts",
+    "start": "NODE_OPTIONS=--stack-trace-limit=100 ts-node --stack-trace-limit=100 -P ./tsconfig.prod.json  -- src/index.ts",
+    "graphql:generate": "graphql-codegen --config codegen.yml",
+    "type-check": "tsc --project tsconfig.json --pretty --noEmit",
+    "lint": "eslint --ext ts,tsx --fix",
+    "db:reset": "yarn db:drop; rm ./src/models/_current.json; rm ./src/models/_current_bak.json; rm ./src/migrations/*; yarn db:migration:sync --name=InitDb; yarn db:create; yarn db:migrate",
+    "db:migration:sync": "ts-node ./migration-gen/migrationSync.ts",
+    "db:migrate": "sequelize-cli db:migrate --config=./src/config/config.js",
+    "db:create": "sequelize-cli db:create --config=./src/config/config.js",
+    "db:drop": "sequelize-cli db:drop --config=./src/config/config.js",
+    "db:migrate:prod": "sequelize-cli db:migrate --url $DATABASE_URL"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.3.7",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-proposal-decorators": "^7.12.12",
+    "@koa/cors": "^3.0.0",
+    "@koa/router": "^10.0.0",
+    "@sendgrid/mail": "^7.4.2",
+    "@sentry/integrations": "^6.0.4",
+    "@sentry/node": "^6.1.0",
+    "@sentry/tracing": "^6.1.0",
+    "@types/cookie": "^0.3.3",
+    "@types/faker": "^5.1.6",
+    "@types/graphql-iso-date": "^3.4.0",
+    "@types/ioredis": "^4.14.9",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/koa-logger": "^3.1.1",
+    "@types/koa-redis": "^4.0.0",
+    "@types/koa-session": "^5.10.1",
+    "@types/koa__router": "^8.0.2",
+    "@types/lodash": "^4.14.165",
+    "@types/node": "^14.14.25",
+    "@types/randomcolor": "^0.5.5",
+    "@types/uuid": "^8.3.0",
+    "@types/validator": "^13.1.3",
+    "@uploadcare/upload-client": "^1.1.2",
+    "@vjpr/babel-plugin-parameter-decorator": "^1.0.15",
+    "airtable": "^0.10.1",
+    "apollo-log": "^1.0.1",
+    "apollo-server": "^2.19.2",
+    "apollo-server-koa": "^2.14.2",
+    "apollo-server-micro": "^2.19.2",
+    "arg": "^5.0.0",
+    "babel-plugin-import": "^1.13.3",
+    "babel-plugin-transform-typescript-metadata": "^0.3.1",
+    "body-parser": "^1.19.0",
+    "class-validator": "^0.13.1",
+    "cookie": "^0.4.0",
+    "cors": "^2.8.5",
+    "dayjs": "^1.10.3",
+    "deep-diff": "^1.0.2",
+    "dotenv": "^8.2.0",
+    "exceljs": "^4.2.0",
+    "faker": "^5.3.1",
+    "filestack-js": "^3.21.1",
+    "graphql": "^15.4.0",
+    "graphql-iso-date": "^3.6.1",
+    "graphql-type-json": "^0.3.2",
+    "humanize-string": "^2.1.0",
+    "ioredis": "^4.14.1",
+    "jsonwebtoken": "^8.5.1",
+    "jszip": "^3.6.0-0",
+    "koa": "^2.10.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-jwt": "^4.0.0",
+    "koa-logger": "^3.2.1",
+    "koa-redis": "^4.0.0",
+    "koa-router": "^7.4.0",
+    "koa-session": "^5.12.3",
+    "lodash": "^4.17.15",
+    "moment": "^2.29.1",
+    "node-dev": "^4.0.0",
+    "node-fetch": "^2.6.1",
+    "object-hash": "^2.1.1",
+    "otplib": "^12.0.1",
+    "pdf-puppeteer": "^1.1.10",
+    "pdfmake": "^0.1.70",
+    "performance-now": "^2.1.0",
+    "pg": "^8.5.1",
+    "qs": "^6.9.6",
+    "randomcolor": "^0.6.2",
+    "reflect-metadata": "^0.1.13",
+    "sequelize": "^6.5.0",
+    "sequelize-cli": "^6.2.0",
+    "sequelize-mig": "^2.6.0",
+    "sequelize-typescript": "^2.0.0",
+    "sql-highlight": "^3.3.2",
+    "titleize": "^2.1.0",
+    "ts-node": "^9.1.1",
+    "type-graphql": "^1.1.1",
+    "typedi": "^0.7.3",
+    "typescript": "^4.1.2",
+    "uuid": "^8.3.2",
+    "validator": "^13.5.2",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@typescript-eslint/eslint-plugin": "^4.14.1",
+    "@typescript-eslint/parser": "^4.14.1",
+    "babel-plugin-graphql-tag": "^3.1.0",
+    "eslint": "^7.18.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-typescript": "^12.0.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-unused-imports": "^1.0.1",
+    "husky": "^4.3.8",
+    "lint-staged": "^10.5.3",
+    "prettier": "^2.2.1",
+    "ts-node-dev": "^1.1.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
+}
+```
+
+## What I learnt
+
+A Nodejs API is pretty awesome once you've got it setup! Yes, I miss Rails console, but I'd trade that for Typescript. There are still a few pains when it comes to learning a new ORM, making silly mistakes or forgetting `async/await` for a promise but this is a smoother experience and is pretty easy to onboard new members quickly – if you know frontend, you'll be able to work on the backend in no time.
+
+Deployment has been tricky and new. Rails and Heroku fit really well. Trying to get Nodejs on Heroku took some time and I don't know how it will scale long term 🤞. Lastly, we decided to use Sequelize as our ORM, despite really considering TypeORM and MikroORM. Ultimately, it came down to switching cost, and

@@ -11,20 +11,7 @@ export const config = {
   websiteLogo: image,
   twitterHandle: '@mmahalwy',
   twitterCardType: "mmahalwy's blog",
-  navigation: [
-    {
-      text: 'Mo',
-      link: '/',
-    },
-    {
-      text: 'Blog',
-      link: '/blog',
-    },
-    {
-      text: 'Startup ideas',
-      link: '/blog/startup-problems',
-    },
-  ],
+  
   css: {
     primaryColor: '#111',
     accentColor: '#455A64',
