@@ -3,7 +3,7 @@ import React from 'react';
 import { NextSeo } from 'next-seo';
 import { Box, Heading, Text } from '@chakra-ui/react';
 import TagBlock from './Tags';
-import { articleSEO, createSEOConfig } from '../utils/seo';
+import { BlogSeo, createSEOConfig } from '../utils/seo';
 import { formatDisplayDate, formatSEODate } from '../utils/formatters';
 
 type BlogMetaProps = {
@@ -31,6 +31,7 @@ const BlogMeta = ({ meta }: BlogMetaProps) => {
   return (
     <Box py={10}>
       <NextSeo {...createSEOConfig(meta)} />
+      <BlogSeo data={meta} />
       <Heading>{meta.title}</Heading>
       <Text>
         <small className="post-date">
@@ -38,7 +39,6 @@ const BlogMeta = ({ meta }: BlogMetaProps) => {
         </small>
       </Text>
       <TagBlock tags={meta.tags} />
-      {articleSEO(meta)}
     </Box>
   );
 };

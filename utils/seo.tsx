@@ -1,28 +1,6 @@
 import React from 'react';
-import { ArticleJsonLd, NextSeoProps } from 'next-seo';
+import { BlogJsonLd, NextSeoProps } from 'next-seo';
 import { config } from '../config';
-
-export function articleSEO(postData) {
-  if (!postData) return;
-  const description = postData.seoDescription
-    ? postData.seoDescription
-    : config.siteDescription;
-
-  // eslint-disable-next-line consistent-return
-  return (
-    <ArticleJsonLd
-      url={postData.canonicalUrl}
-      title={postData.title}
-      images={[config.websiteLogo]}
-      datePublished={postData.publishDate}
-      dateModified={postData.modifiedDate}
-      authorName={config.author}
-      publisherName={config.author}
-      publisherLogo={config.websiteLogo}
-      description={description}
-    />
-  );
-}
 
 type DataType = {
   title?: string;
@@ -30,6 +8,8 @@ type DataType = {
   canonicalUrl?: string;
   imageUrl?: string;
   slug?: string;
+  publishDate?: string;
+  modifiedDate?: string;
 };
 
 const getImage = (data: DataType = {}) => {
@@ -57,6 +37,26 @@ const getImage = (data: DataType = {}) => {
     },
   ];
 };
+
+export function BlogSeo({ data }: { data: DataType }) {
+  if (!data) return null;
+
+  const description = data.seoDescription
+    ? data.seoDescription
+    : config.siteDescription;
+
+  return (
+    <BlogJsonLd
+      url={data.canonicalUrl}
+      title={data.title}
+      images={getImage(data).map((file) => file.url)}
+      datePublished={data.publishDate}
+      dateModified={data.modifiedDate}
+      authorName={config.author}
+      description={description}
+    />
+  );
+}
 
 export function createSEOConfig(data: DataType = {}): NextSeoProps {
   const title = data.title || config.defaultPageTitle;
