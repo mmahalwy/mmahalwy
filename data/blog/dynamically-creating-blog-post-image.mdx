@@ -1,0 +1,50 @@
+---
+title: 'Dynamically creating blog post image'
+publishDate: '2021-02-13'
+seoDescription: 'API response for making dynamic images for your blog post'
+exclude: false
+---
+
+I found myself creating custom images for every blog post, and sometimes, I don't want to invest the time. So I wrote a simple API that would dynamically create the image with the title of the post and a random background color. You can see the code below but also on [my repo](https://github.com/mmahalwy/mmahalwy)
+
+```typescript
+import Jimp from 'jimp';
+import randomcolor from 'randomcolor';
+import { getFileBySlug } from '../../../utils/mdx';
+
+export default async (req, res) => {
+  const post = await getFileBySlug('blog', req.query.slug);
+
+  const buffer = await new Promise((resolve) => {
+    // eslint-disable-next-line no-new
+    new Jimp(
+      1200,
+      630,
+      randomcolor({ luminosity: 'dark', seed: req.query.slug }),
+      async (err, image) => {
+        const font = await Jimp.loadFont(Jimp.FONT_SANS_128_WHITE);
+
+        await image.print(
+          font,
+          0,
+          0,
+          {
+            text: post.frontMatter.title,
+            alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+            alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
+          },
+          1200,
+          630
+        );
+
+        const b = await image.getBufferAsync(Jimp.MIME_JPEG);
+
+        resolve(b);
+      }
+    );
+  });
+
+  res.writeHead(200, { 'Content-Type': Jimp.MIME_JPEG });
+  res.end(buffer, 'binary');
+};
+```

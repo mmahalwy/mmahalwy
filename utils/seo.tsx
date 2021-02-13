@@ -28,7 +28,34 @@ type DataType = {
   title?: string;
   seoDescription?: string;
   canonicalUrl?: string;
-  url?: string;
+  imageUrl?: string;
+  slug?: string;
+};
+
+const getImage = (data: DataType = {}) => {
+  if (data.imageUrl) {
+    return [{ url: data.imageUrl, width: 600, height: 300, alt: data.title }];
+  }
+
+  if (data.slug) {
+    return [
+      {
+        url: `/api/blog-image/${data.slug}`,
+        width: 600,
+        height: 300,
+        alt: data.title,
+      },
+    ];
+  }
+
+  return [
+    {
+      url: config.websiteLogo,
+      width: 280,
+      height: 280,
+      alt: 'mmahalwy',
+    },
+  ];
 };
 
 export function createSEOConfig(data: DataType = {}): NextSeoProps {
@@ -46,16 +73,7 @@ export function createSEOConfig(data: DataType = {}): NextSeoProps {
       url: data.canonicalUrl,
       title,
       description,
-      images: data.url
-        ? [{ url: data.url, width: 600, height: 300 }]
-        : [
-            {
-              url: config.websiteLogo,
-              width: 280,
-              height: 280,
-              alt: 'mmahalwy',
-            },
-          ],
+      images: getImage(data),
       site_name: config.siteName,
     },
     twitter: {

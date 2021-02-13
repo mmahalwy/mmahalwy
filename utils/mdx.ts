@@ -39,6 +39,7 @@ export async function getFileBySlug(type, slug) {
       wordCount: content.split(/\s+/gu).length,
       readingTime: readingTime(content),
       slug: slug || null,
+      title: data.title,
       ...data,
     },
   };
