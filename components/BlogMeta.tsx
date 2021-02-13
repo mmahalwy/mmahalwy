@@ -32,7 +32,7 @@ const BlogMeta = ({ meta }: BlogMetaProps) => {
     <Box py={10}>
       <NextSeo {...createSEOConfig(meta)} />
       <BlogSeo data={meta} />
-      <Heading>{meta.title}</Heading>
+      <Heading as="h1">{meta.title}</Heading>
       <Text>
         <small className="post-date">
           {formatDisplayDate(formattedPublishDate)} • {meta.readingTime.text}
