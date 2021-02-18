@@ -13,5 +13,6 @@
     "mdx": {
       "parser": "markdown"
     }
-  }
+  },
+  "pasteImage.path": "${projectRoot}/public/images"
 }

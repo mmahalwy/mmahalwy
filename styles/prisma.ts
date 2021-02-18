@@ -122,6 +122,7 @@ const prismBaseTheme = css`
   }
 
   .remark-code-title {
+    margin-top: 1rem;
     padding: ${theme.space[2]} ${theme.space[4]};
     font-family: ${theme.fonts.mono};
     background: ${theme.colors.gray[200]};
@@ -245,6 +246,7 @@ export const prismDarkTheme = css`
   }
 
   .remark-code-title {
+    margin-top: 1rem;
     background: ${theme.colors.gray[700]};
     color: ${theme.colors.gray[100]};
     border: 1px solid ${theme.colors.gray[700]};
