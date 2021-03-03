@@ -1,0 +1,260 @@
+---
+title: 'Writing tests with Sequelize, GraphQL and Typescript'
+publishDate: '2021-03-03'
+seoDescription: 'How to write tests with Jest, Sequelize and Typescript'
+exclude: false
+---
+
+At Shepherd, we use GraphQL, Apollo, Typescript and Sequelize pretty heavily. Why Sequelize and not Prisma? That's for another blog post 🙂.
+
+Here is the quick preview:
+
+```typescript
+import faker from 'faker';
+import { ApolloServerTestClient } from 'apollo-server-testing';
+import { Sequelize } from 'sequelize-typescript';
+import testApolloServer from '../testApolloServer';
+import {
+  CreateOrganizationDocument,
+  CreateOrganizationMutation,
+  CreateOrganizationMutationVariables,
+  OrganizationTypeEnum as OrganizationTypeEnumGenerated,
+  UpdateOrganizationDocument,
+  UpdateOrganizationMutation,
+  UpdateOrganizationMutationVariables,
+} from '../generatedSchema';
+import initializeDatabase from '../../src/initializeDatabase';
+import {
+  Organization,
+  OrganizationTypeEnum,
+} from '../../src/models/Organization';
+import { User } from '../../src/models/User';
+
+describe('OrganizationResolver', () => {
+  let server: ApolloServerTestClient;
+  let sequelize: Sequelize;
+  let user: User;
+
+  beforeAll(async () => {
+    [server, sequelize] = await Promise.all([
+      testApolloServer(),
+      initializeDatabase({ logging: false }),
+    ]);
+  });
+
+  beforeEach(async () => {
+    user = await User.create({ email: faker.internet.email() });
+  });
+
+  afterEach(async () => {
+    await Promise.all(
+      Object.values(sequelize.models).map(async (model) => {
+        return model.destroy({ where: {}, truncate: true, cascade: true });
+      })
+    );
+  });
+
+  afterAll(async () => {
+    await sequelize.close();
+  });
+
+  test('should not allow unlogged in', async () => {
+    const companyName = faker.company.companyName();
+
+    const res = await server.mutate<
+      CreateOrganizationMutation,
+      CreateOrganizationMutationVariables
+    >({
+      mutation: CreateOrganizationDocument,
+      variables: {
+        input: {
+          name: companyName,
+          type: OrganizationTypeEnumGenerated.Brokerage,
+        },
+      },
+    });
+
+    expect(res?.errors).toMatchSnapshot();
+  });
+
+  test('should create organization', async () => {
+    const companyName = faker.company.companyName();
+    const thisServer = await testApolloServer(() => ({
+      user,
+    }));
+    const res = await thisServer.mutate<
+      CreateOrganizationMutation,
+      CreateOrganizationMutationVariables
+    >({
+      mutation: CreateOrganizationDocument,
+      variables: {
+        input: {
+          name: companyName,
+          type: OrganizationTypeEnumGenerated.Brokerage,
+        },
+      },
+    });
+
+    expect(res?.data).toMatchSnapshot({
+      createOrganization: {
+        organization: {
+          id: expect.any(String),
+          name: expect.any(String),
+        },
+      },
+    });
+  });
+
+  test('should update organization', async () => {
+    const companyName = faker.company.companyName();
+    const companyNameNew = faker.company.companyName();
+    const logoUrl = faker.image.image();
+
+    const organization = await Organization.create({
+      name: companyName,
+      type: OrganizationTypeEnum.BROKERAGE,
+    });
+    const thisServer = await testApolloServer(() => ({
+      user,
+    }));
+
+    const res = await thisServer.mutate<
+      UpdateOrganizationMutation,
+      UpdateOrganizationMutationVariables
+    >({
+      mutation: UpdateOrganizationDocument,
+      variables: {
+        input: {
+          id: organization.id,
+          name: companyNameNew,
+          // @ts-ignore
+          type: OrganizationTypeEnumGenerated.Brokerage,
+          logoUrl,
+        },
+      },
+    });
+
+    const sameOrganization = await Organization.findByPk(organization.id, {
+      rejectOnEmpty: true,
+    });
+
+    expect(res?.data).toMatchSnapshot({
+      updateOrganization: {
+        organization: {
+          id: expect.any(String),
+          name: expect.any(String),
+          logoUrl: expect.any(String),
+        },
+      },
+    });
+    expect(sameOrganization.name).toEqual(companyNameNew);
+  });
+});
+```
+
+Let's break it down!
+
+**Setup our server and initialize Sequelize**
+
+```typescript
+beforeAll(async () => {
+  [server, sequelize] = await Promise.all([
+    testApolloServer(),
+    initializeDatabase({ logging: false }),
+  ]);
+});
+```
+
+**Set the requesting user**
+
+```typescript
+beforeEach(async () => {
+  user = await User.create({ email: faker.internet.email() });
+});
+```
+
+**Clean the DB after every test**
+Note: when running jest, you have to run it with `-runInBand`. Jest normally runs specs in parallel, creating problems when you're cleaning the DB after every test.
+
+```typescript
+afterEach(async () => {
+  await Promise.all(
+    Object.values(sequelize.models).map(async (model) => {
+      return model.destroy({ where: {}, truncate: true, cascade: true });
+    })
+  );
+});
+```
+
+**Make sure to close the connection to DB once we are all done!**
+
+```typescript
+afterAll(async () => {
+  await sequelize.close();
+});
+```
+
+**Test a mutation**
+We are creating a test specific server and setting the requesting user to the context. Next, we will fire off a mutation to the test server then check the response (I am using snapshots here, might not be the best idea, but for the sake of making sure my GraphQL schema matches, I wanted to keep it here).
+
+```typescript
+test('should create organization', async () => {
+  const companyName = faker.company.companyName();
+  const thisServer = await testApolloServer(() => ({
+    user,
+  }));
+  const res = await thisServer.mutate<
+    CreateOrganizationMutation,
+    CreateOrganizationMutationVariables
+  >({
+    mutation: CreateOrganizationDocument,
+    variables: {
+      input: {
+        name: companyName,
+        type: OrganizationTypeEnumGenerated.Brokerage,
+      },
+    },
+  });
+
+  expect(res?.data).toMatchSnapshot({
+    createOrganization: {
+      organization: {
+        id: expect.any(String),
+        name: expect.any(String),
+      },
+    },
+  });
+});
+```
+
+**Test apollo server**
+
+```typescript
+import Container from 'typedi';
+import { buildSchema } from 'type-graphql';
+import { ApolloServer } from 'apollo-server';
+import { createTestClient } from 'apollo-server-testing';
+import { customAuthChecker } from '../src/apolloServer';
+import { UserResolver } from '../src/resolvers/UserResolver';
+import { OrganizationResolver } from '../src/resolvers/OrganizationResolver';
+import { RetoolResolver } from '../src/resolvers/RetoolResolver';
+
+const testApolloServer = async (context = () => ({})) => {
+  // <-- notice that we can set context on the spec!
+  const schema = await buildSchema({
+    resolvers: [UserResolver, OrganizationResolver, RetoolResolver],
+    authChecker: customAuthChecker,
+    container: Container,
+  });
+
+  const server = new ApolloServer({
+    schema,
+    context,
+  });
+
+  // @ts-ignore
+  return createTestClient(server);
+};
+
+export default testApolloServer;
+```
