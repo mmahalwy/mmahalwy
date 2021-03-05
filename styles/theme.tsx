@@ -1,7 +1,9 @@
-import { extendTheme } from '@chakra-ui/react';
+import { ColorMode, extendTheme } from '@chakra-ui/react';
+
+const initialColorMode: ColorMode = 'dark';
 
 const config = {
-  initialColorMode: 'dark',
+  initialColorMode,
 
   fonts: {
     body:
