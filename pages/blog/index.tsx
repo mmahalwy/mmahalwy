@@ -1,6 +1,7 @@
 import React from 'react';
+import randomcolor from 'randomcolor';
 import { NextPage } from 'next';
-import { Box, Heading, Text } from '@chakra-ui/react';
+import { Box, Heading, Tag, Text } from '@chakra-ui/react';
 import dayjs from 'dayjs';
 import { getAllFilesFrontMatter } from '../../utils/mdx';
 import Anchor from '../../components/dls/Anchor';
@@ -23,6 +24,25 @@ const Blog: NextPage<any> = ({ posts = [] }) => {
             textDecoration="none"
             href={`/blog/${post.slug}`}
           >
+            {post.tag && (
+              <Tag
+                size="sm"
+                mb={1}
+                bgColor={randomcolor({
+                  luminosity: 'dark',
+                  seed: post.tag,
+                })}
+                // bgGradient={`linear(to-l, ${randomcolor({
+                //   luminosity: 'dark',
+                //   seed: post.tag,
+                // })}, ${randomcolor({
+                //   luminosity: 'dark',
+                //   seed: `${post.tag}${post.publishDate}`,
+                // })})`}
+              >
+                {post.tag.toUpperCase()}
+              </Tag>
+            )}
             <Heading size="md">{post.title}</Heading>
             <Text color="gray.400">{post.seoDescription}</Text>
             <Text fontSize={12} color="gray.400">

@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
+import randomcolor from 'randomcolor';
 import { NextSeo } from 'next-seo';
-import { Box, Heading, Text } from '@chakra-ui/react';
-import TagBlock from './Tags';
+import { Box, Heading, Tag, Text } from '@chakra-ui/react';
 import { BlogSeo, createSEOConfig } from '../utils/seo';
 import { formatDisplayDate, formatSEODate } from '../utils/formatters';
 
@@ -10,7 +10,7 @@ type BlogMetaProps = {
   meta: {
     publishDate: string;
     title: string;
-    tags: string[];
+    tag: string;
     readingTime: {
       text: string;
       minutes: number;
@@ -38,7 +38,25 @@ const BlogMeta = ({ meta }: BlogMetaProps) => {
           {formatDisplayDate(formattedPublishDate)} • {meta.readingTime.text}
         </small>
       </Text>
-      <TagBlock tags={meta.tags} />
+      {meta.tag && (
+        <Tag
+          size="sm"
+          mt={1}
+          bgColor={randomcolor({
+            luminosity: 'dark',
+            seed: meta.tag,
+          })}
+          // bgGradient={`linear(to-l, ${randomcolor({
+          //   luminosity: 'dark',
+          //   seed: meta.tag,
+          // })}, ${randomcolor({
+          //   luminosity: 'dark',
+          //   seed: `${meta.tag}${meta.publishDate}`,
+          // })})`}
+        >
+          {meta.tag.toUpperCase()}
+        </Tag>
+      )}
     </Box>
   );
 };

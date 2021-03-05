@@ -39,7 +39,7 @@ const components = {
   Anchor: Link,
   hr: Hr,
   OutboundAnchor: Anchor,
-  inlineCode: Code,
+  inlineCode: (props) => <Code {...props} colorScheme="red" />,
   BlogMeta,
   ConvertkitForm,
   Figure,
