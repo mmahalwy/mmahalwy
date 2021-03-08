@@ -2,10 +2,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const withPlugins = require('next-compose-plugins');
 // const rehypePrism = require('@mapbox/rehype-prism');
-const withFonts = require('next-fonts');
 const images = require('remark-images');
 const emoji = require('remark-emoji');
-const withOptimizedImages = require('next-optimized-images');
 const readingTime = require('reading-time');
 const mdxPrism = require('mdx-prism');
 const withMdxEnhanced = require('next-mdx-enhanced');
@@ -20,8 +18,6 @@ const withMdxEnhanced = require('next-mdx-enhanced');
 // });
 
 module.exports = withPlugins([
-  withFonts,
-  withOptimizedImages,
   withMdxEnhanced({
     layoutPath: 'layouts',
     defaultLayout: true,
@@ -41,7 +37,3 @@ module.exports = withPlugins([
     },
   }),
 ]);
-
-// withMDX({
-//   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
-// });
