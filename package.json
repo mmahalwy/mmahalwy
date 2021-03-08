@@ -21,9 +21,6 @@
   ],
   "author": "Mohamed El Mahallawy",
   "license": "ISC",
-  "bin": {
-    "blog": "cli.js"
-  },
   "browserslist": [
     "last 2 version"
   ],
