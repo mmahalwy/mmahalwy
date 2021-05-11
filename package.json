@@ -46,7 +46,7 @@
     "jimp": "^0.16.1",
     "js-yaml": "^3.13.1",
     "js-yaml-loader": "^1.2.2",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "mdx-prism": "^0.3.1",
     "next": "^10.0.3",
     "next-compose-plugins": "^2.2.0",
