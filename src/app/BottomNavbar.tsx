@@ -1,6 +1,6 @@
 'use client';
 
-import { ActionIcon, Affix, Box, Divider, Flex, Group } from '@mantine/core';
+import { ActionIcon, Affix, Box, Divider, Flex, Group, Tooltip } from '@mantine/core';
 import Link from 'next/link';
 import { MaterialSymbol, MaterialSymbolProps } from 'react-material-symbols';
 
@@ -26,19 +26,19 @@ const BottomNavbar = () => {
       >
         <Group gap="4px" align="center">
           {LINKS.map((link) => (
-            <ActionIcon
-              key={link.label}
-              variant="transparent"
-              color="gray"
-              radius="lg"
-              size="xl"
-              component={Link}
-              href={link.link}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <MaterialSymbol icon={link.icon} size={24} fill grade={-25} />
-            </ActionIcon>
+            <Tooltip key={link.label} label={link.label} color="black">
+              <ActionIcon
+                key={link.label}
+                variant="transparent"
+                color="gray"
+                radius="lg"
+                size="xl"
+                component={Link}
+                href={link.link}
+              >
+                <MaterialSymbol icon={link.icon} size={24} fill grade={-25} />
+              </ActionIcon>
+            </Tooltip>
           ))}
         </Group>
         <Divider orientation="vertical" />
