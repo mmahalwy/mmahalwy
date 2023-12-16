@@ -28,7 +28,7 @@ const EXPERIENCE = [
 
 export default function Home() {
   return (
-    <Container size="sm" pt={125}>
+    <Container size="sm" pt={125} style={{ overflow: 'hidden' }}>
       <Stack gap="100px">
         <Stack gap="md">
           <Group gap="xs">

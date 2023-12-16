@@ -3,6 +3,8 @@
 import { ActionIcon, Affix, Box, Divider, Flex, Group, Tooltip } from '@mantine/core';
 import Link from 'next/link';
 import { MaterialSymbol, MaterialSymbolProps } from 'react-material-symbols';
+import { FaTwitter, FaInstagram } from 'react-icons/fa';
+import { IconType } from 'react-icons';
 
 const LINKS: { link: string; label: string; icon: MaterialSymbolProps['icon'] }[] = [
   { link: '/', label: 'Home', icon: 'home' },
@@ -10,6 +12,17 @@ const LINKS: { link: string; label: string; icon: MaterialSymbolProps['icon'] }[
   { link: '/brands', label: 'Favorite Brands', icon: 'star' },
   { link: '/startup-ideas', label: 'Startup Ideas', icon: 'science' },
   // { link: '/community', label: 'Community' },
+];
+
+const SOCIAL: { link: string; Icon: IconType }[] = [
+  {
+    link: 'https://twitter.com/mofromyyz',
+    Icon: FaTwitter,
+  },
+  {
+    link: 'https://instagram.com/mofromyyz',
+    Icon: FaInstagram,
+  },
 ];
 
 const BottomNavbar = () => {
@@ -23,12 +36,31 @@ const BottomNavbar = () => {
           boxShadow: '0px 0px 24px 0px rgba(0, 0, 0, 0.25)',
           backdropFilter: 'blur(12px)',
         }}
+        p="8px"
       >
         <Group gap="4px" align="center">
-          {LINKS.map((link) => (
-            <Tooltip key={link.label} label={link.label} color="black">
+          <Group>
+            {LINKS.map((link) => (
+              <Tooltip key={link.label} label={link.label} color="black">
+                <ActionIcon
+                  key={link.label}
+                  variant="transparent"
+                  color="gray"
+                  radius="lg"
+                  size="xl"
+                  component={Link}
+                  href={link.link}
+                >
+                  <MaterialSymbol icon={link.icon} size={24} fill grade={-25} />
+                </ActionIcon>
+              </Tooltip>
+            ))}
+          </Group>
+          <Divider orientation="vertical" color="rgba(255,255,255,0.12)" />
+          <Group gap="4px" align="center">
+            {SOCIAL.map((link) => (
               <ActionIcon
-                key={link.label}
+                key={link.link}
                 variant="transparent"
                 color="gray"
                 radius="lg"
@@ -36,12 +68,11 @@ const BottomNavbar = () => {
                 component={Link}
                 href={link.link}
               >
-                <MaterialSymbol icon={link.icon} size={24} fill grade={-25} />
+                <link.Icon size={24} />
               </ActionIcon>
-            </Tooltip>
-          ))}
+            ))}
+          </Group>
         </Group>
-        <Divider orientation="vertical" />
       </Box>
     </Flex>
   );
