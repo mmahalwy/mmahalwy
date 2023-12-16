@@ -1,14 +1,14 @@
 'use client';
 
-import { ActionIcon, Affix, Box, Flex, Group } from '@mantine/core';
-import { IconSend } from '@tabler/icons-react';
+import { ActionIcon, Affix, Box, Divider, Flex, Group } from '@mantine/core';
 import Link from 'next/link';
+import { MaterialSymbol, MaterialSymbolProps } from 'react-material-symbols';
 
-const LINKS = [
-  { link: '/', label: 'Home', icon: <IconSend /> },
-  { link: '/blog', label: 'Blog', icon: <IconSend /> },
-  { link: '/brands', label: 'Favorite Brands', icon: <IconSend /> },
-  { link: '/startup-ideas', label: 'Startup Ideas', icon: <IconSend /> },
+const LINKS: { link: string; label: string; icon: MaterialSymbolProps['icon'] }[] = [
+  { link: '/', label: 'Home', icon: 'home' },
+  { link: '/blog', label: 'Blog', icon: 'edit' },
+  { link: '/brands', label: 'Favorite Brands', icon: 'star' },
+  { link: '/startup-ideas', label: 'Startup Ideas', icon: 'science' },
   // { link: '/community', label: 'Community' },
 ];
 
@@ -37,10 +37,11 @@ const BottomNavbar = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              {link.icon}
+              <MaterialSymbol icon={link.icon} size={24} fill grade={-25} />
             </ActionIcon>
           ))}
         </Group>
+        <Divider orientation="vertical" />
       </Box>
     </Flex>
   );

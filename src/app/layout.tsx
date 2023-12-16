@@ -1,4 +1,6 @@
 import '@mantine/core/styles.css';
+import 'react-material-symbols/rounded'; // Place in your root app file. There are also `sharp` and `outlined` variants.
+
 import './global.modules.css';
 import React from 'react';
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
