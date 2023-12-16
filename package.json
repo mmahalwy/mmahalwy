@@ -11,20 +11,24 @@
   "dependencies": {
     "@mantine/core": "7.3.1",
     "@mantine/hooks": "7.3.1",
+    "@mdx-js/loader": "^3.0.0",
+    "@mdx-js/react": "^3.0.0",
     "@next/bundle-analyzer": "^14.0.1",
+    "@next/mdx": "^14.0.4",
     "@tabler/icons-react": "^2.40.0",
+    "@types/mdx": "^2.0.10",
+    "next": "14.0.4",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "14.0.4"
+    "react-dom": "^18"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
+    "eslint-config-next": "14.0.4",
     "postcss": "^8.4.31",
     "postcss-preset-mantine": "1.11.1",
-    "eslint-config-next": "14.0.4"
+    "typescript": "^5"
   }
 }

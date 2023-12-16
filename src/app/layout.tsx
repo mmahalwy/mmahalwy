@@ -1,7 +1,36 @@
 import '@mantine/core/styles.css';
+import './global.modules.css';
 import React from 'react';
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
-import { theme } from './theme';
+import localFont from 'next/font/local';
+
+import { resolver, theme } from './theme';
+import BottomNavbar from './BottomNavbar';
+
+const inter = localFont({
+  src: [
+    {
+      path: './fonts/InterDisplay-Regular.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: './fonts/InterDisplay-Italic.ttf',
+      weight: '400',
+      style: 'italic',
+    },
+    {
+      path: './fonts/InterDisplay-Bold.ttf',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: './fonts/InterDisplay-BoldItalic.ttf',
+      weight: '700',
+      style: 'italic',
+    },
+  ],
+});
 
 export const metadata = {
   title: 'Mantine Next.js template',
@@ -10,9 +39,9 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: any }) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.className}>
       <head>
-        <ColorSchemeScript />
+        <ColorSchemeScript forceColorScheme="dark" />
         <link rel="shortcut icon" href="/favicon.svg" />
         <meta
           name="viewport"
@@ -20,7 +49,11 @@ export default function RootLayout({ children }: { children: any }) {
         />
       </head>
       <body>
-        <MantineProvider theme={theme}>{children}</MantineProvider>
+        <MantineProvider theme={theme} cssVariablesResolver={resolver} forceColorScheme="dark">
+          {/* <Navbar /> */}
+          {children}
+          <BottomNavbar />
+        </MantineProvider>
       </body>
     </html>
   );
