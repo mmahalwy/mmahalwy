@@ -36,11 +36,11 @@ export default function Home() {
             <Text c="rgba(255,255,255,0.55)"> You can call me Mo</Text>
           </Group>
           <Title c="white" fz={36} lh={'43px'} fw={400}>
-            I'm the cofounder and CTO of Shepherd, a commercial construction insurtech.
+            I&apos;m the cofounder and CTO of Shepherd, a commercial construction insurtech.
           </Title>
           <Text size="lg" fz={18} lh={'27px'}>
             On my free time, I enjoy playing pickleball, reading, cooking and hanging out with
-            friends. I created this website as a form of self expression. You'll find some
+            friends. I created this website as a form of self expression. You&apos;ll find some
             thoughtful blog posts, hangout areas and
           </Text>
           <Box>
